@@ -47,7 +47,7 @@
                 <span>线路配车数：47</span>
             </div>
             <div class="total-item">
-                <span>在途车辆</span>
+                <span>在途车辆：23</span>
             </div>
             <div class="total-item">
                 <span>发生的时间间隔：10分钟</span>

@@ -18,4 +18,6 @@ body {
 ul, li {
     list-style: none;
 }
+.ps { position: absolute; }
+.pr { position: relative; }
 </style>

@@ -60,7 +60,7 @@
             <!-- right board start -->
             <div class="wrap-item" style="top:0; left: 4598px;">
                 <smart-item :width="2556" :height="2464">
-                    <RoadStatistics />
+                    <RouteStatistics />
                 </smart-item>
             </div>
             <!-- right board end -->
@@ -79,7 +79,7 @@ import {
     MonitorViews,
     PositionMap,
     OrderStatistics,
-    RoadStatistics,
+    RouteStatistics,
     
 } from '@/components/items'
 import { CityApi } from "@/api/city-api";
@@ -92,7 +92,7 @@ import moment from "moment";
         MonitorViews,
         PositionMap,
         OrderStatistics,
-        RoadStatistics,
+        RouteStatistics,
     }
 })
 export default class Dashboard extends Vue {
