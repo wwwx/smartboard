@@ -20,4 +20,5 @@ ul, li {
 }
 .ps { position: absolute; }
 .pr { position: relative; }
+.highcharts-background { fill: #021140 }
 </style>

@@ -12,22 +12,51 @@
                 <i class="bottom-line"></i>
             </li>
         </ul>
+
+        <ul class="tabs-analysis-subtitle">
+             <li class="tab-item" 
+                v-for="tab in subAnalysisTabs" 
+                :key="tab.id" 
+                :class="{ active: subAnalysisActive == tab.id }" 
+                 @click="onSubAnaysisTabsClick(tab.id)"
+            >
+                <span >{{ tab.title }}</span>
+            </li>
+        </ul>
+
+
+        <div class="order-content">
+            <Order />
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import Order from './operate/Order/index.vue'
 
-@Component
+@Component({
+    components: {
+        Order
+    }
+})
 export default class Board extends Vue {
     analysisActive = 1001
+    subAnalysisActive = 100101
     analysisTabs = [
         {title: '经营分析', id: 1001},
         {title: '热点分析', id: 1002},
     ]
+    subAnalysisTabs = [
+        {title: '订单', id: 100101},
+        {title: '营销', id: 100202},
+        {title: '车辆运营', id: 100203},
+    ]
     onAnaysisTabsClick(index: number) {
-        console.log(index)
         this.analysisActive = index
+    }
+    onSubAnaysisTabsClick(index: number) {
+        this.subAnalysisActive = index
     }
 }
 </script>
@@ -35,6 +64,41 @@ export default class Board extends Vue {
 <style lang="stylus" scoped>
 .order-board {
     user-select none
+}
+.order-content {
+    position absolute
+    top 380px
+}
+.tabs-analysis-subtitle {
+    position relative
+    top 100px
+    z-index 2
+    display flex
+    justify-content center
+    align-items center
+    .tab-item {
+        width:251px;
+        height:106px;
+        background-color: rgba(1, 107,255, .2);
+        display flex
+        justify-content center
+        align-items center
+        border-radius 54px
+        margin 0 40px
+        span {
+            font-size:42px;
+            font-weight:400;
+            color:rgba(246,247,247,1);
+        }
+
+        &.active {
+            background-color: rgba(1, 107,255, 1);
+        }
+
+        &:nth-child(3) {
+            width: 295px !important;
+        }
+    }
 }
 .tabs-analysis {
     position relative

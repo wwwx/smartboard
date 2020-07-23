@@ -31,5 +31,8 @@
   "description": "",
   "main": "index.js",
   "author": "oct16",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "highcharts": "^8.1.2"
+  }
 }

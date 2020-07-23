@@ -3,9 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "bootstrap-4-grid";
-import echarts from "echarts";
-
-Vue.prototype.$echarts = echarts;
 
 Vue.config.productionTip = false;
 
