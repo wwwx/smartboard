@@ -66,8 +66,9 @@ export default class Board extends Vue {
     user-select none
 }
 .order-content {
-    position absolute
-    top 380px
+    position relative
+    top 200px
+    width 100%
 }
 .tabs-analysis-subtitle {
     position relative

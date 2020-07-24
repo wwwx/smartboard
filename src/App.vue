@@ -21,4 +21,13 @@ ul, li {
 .ps { position: absolute; }
 .pr { position: relative; }
 .highcharts-background { fill: #021140 }
+
+.chart-container {
+    position: relative
+    flex 1 1 auto
+
+    display flex
+    justify-content center
+}
+.border-none { border: 0 !important; position: relative; top: -100px; }
 </style>

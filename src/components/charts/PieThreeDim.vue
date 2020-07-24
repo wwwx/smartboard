@@ -1,48 +1,60 @@
 <template>
-    <div id="orderChart" ></div>
+    <div class="chart-container" >
+        <div :id="id"></div>
+        <div class="chart-legend d-flex">
+            <div class="item">
+                <span class="item-icon" :style="{ backgroundColor: colors[1] }"></span>
+                <span class="item-title">待付款</span>
+            </div>
+            <div class="item">
+                <span class="item-icon" :style="{ backgroundColor: colors[0] }"></span>
+                <span class="item-title">已完成订单</span>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { CityApi } from "@/api/city-api";
-import { getOrderData } from "@/api/mock";
-var Highcharts = require('highcharts');
+import Highcharts from 'highcharts'
 @Component
 export default class OrderChart extends Vue {
+    @Prop() id!: string;
+    @Prop() option!: any;
+    @Prop() colors!: Array<string>;
     mounted() {
-        // this.getData();
         this.drawChart()
     }
 
-    getData() {
-        CityApi.getOrderData()
-            .then(res => res.json())
-            .then((res: any) => {
-                this.drawChart(res && res.data);
-            });
-        // this.drawChart(getOrderData());
+    drawChart() {
+        const { colors } = this;
+        Highcharts.setOptions({ colors });
+
+        this.pieOption.title.text = this.option.title
+        this.pieOption.series[0].data = this.option.series_data
+
+        Highcharts.chart(this.id, this.pieOption);
     }
 
-    drawChart(data: any = {}) {
-            console.log('ok')
-        
-        var chart = Highcharts.chart('orderChart', {
+    pieOption: any = {
+            credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
                     type: 'pie',
                     options3d: {
                             enabled: true,
-                            alpha: 45,
-                            beta: 0
+                            alpha: 54,
+                            beta: 0,
                     },
-                    height: 600,
-                    width: 600,
+                    height: 640,
+                    width: 1000,
+                    
             },
             title: {
-                    text: '平台总订单量（个）',
+                    text: '',
                     style: {
                         color: 'rgba(246,247,247,1)',
-                        fontSize: '50px',
-                        fontWeight: '400',
+                        fontSize: '40px',
+                        fontWeight: '100',
                     }
             },
             tooltip: {
@@ -59,45 +71,53 @@ export default class OrderChart extends Vue {
                     pie: {
                             allowPointSelect: true,
                             cursor: 'pointer',
-                            depth: 35,
+                            depth: 75,
                             dataLabels: {
                                 enabled: true,
                                 format: '{point.name}',
                                 style: {
 
                                         color: '#F6F7F7',
-                                        fontSize: '42px',
-                                        fontWeight: '200',
+                                        fontSize: '36px',
+                                        fontWeight: '100',
                                 }
                             },
                             size: 400,
-                            showInLegend: true,
+                            // showInLegend: true,
                     }
             },
             series: [{
                     type: 'pie',
-                //     name: '浏览器占比',
-                    data: [
-                            ['待付款',   89],
-                            {
-                                    name: '已完成订单',
-                                    y: 11,
-                                    sliced: true,
-                                    selected: true
-                            },
-                    ]
+                    startAngle: 330, // 起始角度
+                    data: []
             }]
-    });
     }
 }
 </script>
 
 <style lang="stylus" scoped>
-.order-chart {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-}
 
+.chart-legend {
+    position absolute
+    // left 0
+    bottom 0
+
+    .item {
+        margin-right 54px
+    }
+
+    .item-icon {
+        display inline-block
+        width 28px
+        height 28px
+        
+    }
+    .item-title {
+        font-size 28px
+        font-weight 300
+        position relative
+        top -4px
+        left 20px
+    }
+}
 </style>
