@@ -45,9 +45,9 @@ export default class OrderChart extends Vue {
                             alpha: 54,
                             beta: 0,
                     },
-                    height: 640,
+                    height: 540,
                     width: 1000,
-                    
+                
             },
             title: {
                     text: '',
@@ -82,7 +82,7 @@ export default class OrderChart extends Vue {
                                         fontWeight: '100',
                                 }
                             },
-                            size: 400,
+                            size: 520, // 设置饼图尺寸大小
                             // showInLegend: true,
                     }
             },
@@ -100,7 +100,7 @@ export default class OrderChart extends Vue {
 .chart-legend {
     position absolute
     // left 0
-    bottom 0
+    bottom -80px
 
     .item {
         margin-right 54px

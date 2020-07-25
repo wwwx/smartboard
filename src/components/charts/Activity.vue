@@ -25,128 +25,100 @@ export default class OrderChart extends Vue {
 		const self = this
 
         // 去掉这里的注释就是类似 Apple Watch 上的效果了
-Highcharts.setOptions({
-	chart: {
-		backgroundColor: 'black'
-	},
-	colors: ['#0CCDD6', self.colors[0]],
-	title: {
-		style: {
-			color: 'silver'
-		}
-	},
-	tooltip: {
-		style: {
-			color: 'silver'
-		}
-	}
-});
-Highcharts.chart(this.id, {
-	credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
-	chart: {
-		type: 'solidgauge',
-		marginTop: 50,
-		height: 400,
-		width: 400,
-	},
-	title: {
-		text: '',
-		y: 400,
-		style: {
-			fontSize: '44px'
-		}
-	},
-	tooltip: {
-		enabled: false,
-	},
-	pane: {
-		startAngle: 0,
-		endAngle: 360,
-		background: [{ // Track for Move
-			outerRadius: '112%',
-			innerRadius: '88%',
-			backgroundColor: 'silver',
-			//Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.3).get(),
-			borderWidth: 0
-		}]
-	},
-	yAxis: {
-		min: 0,
-		max: 100,
-		lineWidth: 0,
-		tickPositions: []
-	},
-	plotOptions: {
-		solidgauge: {
-			borderWidth: 34,
-			dataLabels: {
-				enabled: true,
-				// format: '{point.name}',
+		Highcharts.setOptions({
+			chart: {
+				backgroundColor: 'black'
+			},
+			colors: ['#0CCDD6', self.colors[0]],
+			title: {
 				style: {
-						color: '#F6F7F7',
-						fontSize: '56px',
-						fontWeight: '100',
-						className: 'border-none'
+					color: 'silver'
 				}
 			},
-			linecap: 'round',
-			stickyTracking: false
-		}
-	},
-	series: [{
-		name: 'Move',
-		borderColor: (Highcharts as any).getOptions().colors[1],
-		// borderColor:'yellow',
-		data: [{
-			color: (Highcharts as any).getOptions().colors[0],
-			// color:'yellow',
-			radius: '100%',
-			innerRadius: '100%',
-			y: 80
-		}]
-	}]
-},
-    /**
-     * In the chart load callback, add icons on top of the circular shapes
-     */
-				 function callback() {
-	// Move icon
-	// this.renderer.path(['M', -8, 0, 'L', 8, 0, 'M', 0, -8, 'L', 8, 0, 0, 8])
-	// 	.attr({
-	// 	'stroke': '#303030',
-	// 	'stroke-linecap': 'round',
-	// 	'stroke-linejoin': 'round',
-	// 	'stroke-width': 2,
-	// 	'zIndex': 10
-	// })
-	// 	.translate(190, 26)
-	// 	.add(this.series[2].group);
-	// Exercise icon
-	// this.renderer.path(['M', -8, 0, 'L', 8, 0, 'M', 0, -8, 'L', 8, 0, 0, 8, 'M', 8, -8, 'L', 16, 0, 8, 8])
-	// 	.attr({
-	// 	'stroke': '#fff',
-	// 	'stroke-linecap': 'round',
-	// 	'stroke-linejoin': 'round',
-	// 	'stroke-width': 2,
-	// 	'zIndex': 10
-	// })
-	// 	.translate(190, 61)
-	// 	.add(this.series[2].group);
-	// Stand icon
-	// this.renderer.path(['M', 0, 8, 'L', 0, -8, 'M', -8, 0, 'L', 0, -8, 8, 0])
-	// 	.attr({
-	// 	'stroke': '#303030',
-	// 	'stroke-linecap': 'round',
-	// 	'stroke-linejoin': 'round',
-	// 	'stroke-width': 2,
-	// 	'zIndex': 10
-	// })
-	// 	.translate(190, 96)
-	// 	.add(this.series[2].group);
-});
+			tooltip: {
+				style: {
+					color: 'silver'
+				}
+			}
+		});
+		this.activityOption.series[0].borderColor = this.colors[0]
+		// this.activityOption.series[0].data[0].y = 50 // 设置要显示的数据百分比值（0～100）
+
+		Highcharts.chart(this.id, this.activityOption, function(c) {
+			// console.log(c)
+			// var centerX = c.series[0];
+    		// var centerY = c.series[0];
+		});
     }
 
-    activityOption: any = null
+    activityOption: any = {
+		credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
+		chart: {
+			type: 'solidgauge',
+			marginTop: 50,
+			height: 400,
+			width: 400,
+		},
+		title: {
+			text: '',
+			y: 400,
+			style: {
+				fontSize: '44px'
+			}
+		},
+		tooltip: {
+			enabled: false,
+		},
+		pane: {
+			startAngle: 0,
+			endAngle: 360,
+			background: [{ // Track for Move
+				outerRadius: '108.9%',
+				innerRadius: '92%',
+				backgroundColor: 'silver',
+				//Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.3).get(),
+				borderWidth: 0
+			}]
+		},
+		yAxis: {
+			min: 0,
+			max: 100,
+			lineWidth: 0,
+			tickPositions: []
+		},
+		plotOptions: {
+			solidgauge: {
+				borderWidth: 24,
+				dataLabels: {
+					enabled: true,
+					borderWidth: 0,
+					verticleAlign: 'bottom',
+					useHTML: true,
+					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -52px;">{y}% <br>' + ' <span style="font-size: 40px; font-weight: 100; opacity: .7;">78886</span><div>', // 数据的百分比 + 数据实际值
+					style: {
+							color: '#F6F7F7',
+							fontSize: '56px',
+							fontWeight: '200',
+					}
+				},
+				linecap: 'round',
+				stickyTracking: false
+			}
+		},
+		series: [{
+			// name: 'Move',
+			// borderColor: (Highcharts as any).getOptions().colors[1],
+			// borderColor:'yellow',
+			data: [{
+				color: (Highcharts as any).getOptions().colors[0],
+				// color:'yellow',
+				/* eslint-disable-next-line */
+				radius: '100%',
+				innerRadius: '100%',
+				y: 80
+			}]
+		}]
+	}
 }
 </script>
 
