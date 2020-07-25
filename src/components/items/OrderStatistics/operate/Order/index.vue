@@ -1,5 +1,6 @@
 <template>
     <div class="order-analysis">
+
         <div class="d-flex justify-content-center" style="width:84%; margin: 0 auto;">
             <PieThreeDim id="chart_pie_1" :option="pieOption1" :colors="['#5474FF', '#00B9E1']" />
             <PieThreeDim id="chart_pie_2" :option="pieOption2" :colors="['#F2B840', '#00B9E1']" />
@@ -10,21 +11,26 @@
             <ActivityChart id="activity_2" :colors="['#F80034']" :option="activityOption2" />
             <ActivityChart id="activity_3" :colors="['#1940F7']" :option="activityOption3" />
         </div>
+
+        <div class="d-flex justify-content-start" style="margin-top: 160px;">
+            <Bar />
+        </div>
         
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import PieThreeDim from '@/components/charts/PieThreeDim.vue'
-import ActivityChart from '@/components/charts/Activity.vue'
-import Bar from '@/components/charts/Bar.vue'
+import PieThreeDim from './PieThreeDim.vue'
+import ActivityChart from './Activity.vue'
+import Bar from './Bar.vue'
 import { cloneDeep } from 'lodash'
 
 @Component({
     components: {
         PieThreeDim,
         ActivityChart,
+        Bar,
     }
 })
 export default class OrderAnalysis extends Vue {

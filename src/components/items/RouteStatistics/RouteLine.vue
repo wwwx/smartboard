@@ -25,7 +25,7 @@
                 <div class="line-end"></div>
                 <div class="line-buses up">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index+ 'px', visibility: ([5,7].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 172 * index - 2 + 'px', visibility: ([5,7].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
                 
@@ -43,7 +43,7 @@
                 <div class="line-start"></div>
                 <div class="line-buses down">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index+ 80 + 'px', visibility: ([3].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 172 * index+ 78 + 'px', visibility: ([3].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 <div class="line-end"></div>
                 <div class="line-buses up">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index+ 'px', visibility: ([2,7].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 172 * index - 2 + 'px', visibility: ([2,7].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="line-start"></div>
                 <div class="line-buses down">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index+ 80 + 'px', visibility: ([6,9].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 172 * index+ 78 + 'px', visibility: ([6,9].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
             </div>
@@ -138,7 +138,7 @@ export default class RouteLine extends Vue {
 }
 .line-1-2,
 .line-2-2 {
-    left: 286px;
+    left: 224px;
 }
 .line-1-1 {
     margin-top: 140px;
