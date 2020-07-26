@@ -3,46 +3,58 @@
         <ul class="tabs-analysis">
             
             <li class="tab-item" 
-                v-for="tab in analysisTabs" 
+                v-for="(tab, index) in analysisTabs" 
                 :key="tab.id" 
-                :class="{ active: analysisActive == tab.id }" 
-                 @click="onAnaysisTabsClick(tab.id)"
+                :class="{ active: analysisActive === index }" 
+                 @click="onTabsClick(index)"
             >
                 <span >{{ tab.title }}</span>
                 <i class="bottom-line"></i>
             </li>
         </ul>
 
-        <div style="position: absolute; left: 0; right: 24px; top: 184px;">
-            <RouteLine />
-        </div>
-
-        <div style="position: absolute; left: 0; right: 24px; bottom: 0;">
-            <TimeTable />
+        <div class="main-content">
+            <component :is="currentComp"></component>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import TimeTable from './TimeTable.vue'
-import RouteLine from './RouteLine.vue'
+import { VueConstructor } from 'vue';
+import Schedule from './schedule/index.vue'
+import Statistics from './statistics/index.vue'
 
 @Component({
     components: {
-        TimeTable,
-        RouteLine,
+        Schedule,
+        Statistics,
     }
 })
 export default class Board extends Vue {
-    analysisActive = 1001
+    analysisActive = 0
     analysisTabs = [
         {title: '线路排班', id: 1001},
         {title: '线路统计', id: 1002},
     ]
-    onAnaysisTabsClick(index: number) {
-        console.log(index)
+    currentComp: VueConstructor | null = null
+    onTabsClick(index: number) {
+        // console.log(index)
         this.analysisActive = index
+        this.currentComp = this.getCurrentComponent(index)
+    }
+
+    getCurrentComponent(index: number): VueConstructor|null {
+        // console.log(index)
+        switch(index) {
+            case 0: return Schedule;
+            case 1: return Statistics;
+            default:
+            return null
+        }
+    }
+    mounted() {
+        this.onTabsClick(0)
     }
 }
 </script>
