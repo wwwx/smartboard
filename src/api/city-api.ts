@@ -21,4 +21,12 @@ export class CityApi {
     return Http.$get(`${BASE}/order/line-order-num`, { ...params });
   }
 
+  static getTodayVehicle(params = {}) {
+    return Http.$get(`${BASE}/schedule/today-vehicle`, { ...params });
+  }
+
+  static getTodayTripInfos(params = {}) {
+    return Http.$get(`${BASE}/schedule/today-tripInfos`, { ...params });
+  }
+
 }

@@ -10,47 +10,26 @@
                     <th>线路</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>鲁A2947905</td>
-                    <td>24</td>
-                    <td>12:02</td>
-                    <td>12:50</td>
-                    <td>305路</td>
-                </tr>
-                <tr>
-                    <td>鲁A2947905</td>
-                    <td>24</td>
-                    <td>12:02</td>
-                    <td>12:50</td>
-                    <td>305路</td>
-                </tr>
-                <tr>
-                    <td>鲁A2947905</td>
-                    <td>24</td>
-                    <td>12:02</td>
-                    <td>12:50</td>
-                    <td>305路</td>
-                </tr>
-                <tr>
-                    <td>鲁A2947905</td>
-                    <td>24</td>
-                    <td>12:02</td>
-                    <td>12:50</td>
-                    <td>305路</td>
+            <tbody v-if="todayTripData">
+                <tr v-for="item in todayTripData" :key="item.id">
+                    <td>{{ item.vehicleNo }}</td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.planDepartTime }}</td>
+                    <td>{{ item.planArriveTime }}</td>
+                    <td>{{ item.lineName }}</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="total">
+        <div class="total" v-if="todayVehicleData">
             <div class="total-item">
-                <span>线路配车数：47</span>
+                <span>线路配车数：{{ todayVehicleData.totalNum }}</span>
             </div>
             <div class="total-item">
-                <span>在途车辆：23</span>
+                <span>在途车辆：{{ todayVehicleData.runNum }}</span>
             </div>
             <div class="total-item">
-                <span>发生的时间间隔：10分钟</span>
+                <span>发生的时间间隔：{{ todayVehicleData.gapsTime }}分钟</span>
             </div>
         </div>
     </div>
@@ -58,10 +37,31 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { CityApi } from '@/api/city-api';
 
 @Component
 export default class TimeTable extends Vue {
-    
+    todayVehicleData: any = null
+    todayTripData: any = null
+    async created() {
+
+        try {
+            const { code, data, msg } = await CityApi.getTodayVehicle({ tripType: 1 }); 
+            this.todayVehicleData = data
+        } catch (error) {
+            
+        }
+        
+        try {
+            const { code, data, msg } = await CityApi.getTodayTripInfos({ tripType: 3 }); 
+            // console.log(data)
+            this.todayTripData = data.slice(0,5)
+        } catch (error) {
+            
+        }
+
+
+    }
 }
 </script>
 

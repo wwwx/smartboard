@@ -10,7 +10,7 @@ export default class OrderChart extends Vue {
     @Prop() id!:string
     @Prop() option!:any
     mounted() {
-        console.log(JSON.stringify(this.option.data, null, 2))
+        // console.log(JSON.stringify(this.option.data, null, 2))
         this.drawChart()
     }
 
