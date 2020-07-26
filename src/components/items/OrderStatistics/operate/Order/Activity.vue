@@ -42,12 +42,11 @@ export default class OrderChart extends Vue {
 			}
 		});
 		this.activityOption.series[0].borderColor = this.colors[0]
-		// this.activityOption.series[0].data[0].y = 50 // 设置要显示的数据百分比值（0～100）
+		this.activityOption.series[0].data[0].y = this.option.data.series[0]
+		// this.activityOption.yAxis.max = this.option.data.max
 
 		Highcharts.chart(this.id, this.activityOption, function(c) {
-			// console.log(c)
-			// var centerX = c.series[0];
-    		// var centerY = c.series[0];
+			
 		});
     }
 
@@ -82,7 +81,7 @@ export default class OrderChart extends Vue {
 		},
 		yAxis: {
 			min: 0,
-			max: 100,
+			max: 100, // 数据总量
 			lineWidth: 0,
 			tickPositions: []
 		},
@@ -94,7 +93,8 @@ export default class OrderChart extends Vue {
 					borderWidth: 0,
 					verticleAlign: 'bottom',
 					useHTML: true,
-					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -52px;">{y}% <br>' + ' <span style="font-size: 40px; font-weight: 100; opacity: .7;">78886</span><div>', // 数据的百分比 + 数据实际值
+					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -52px;">'+ 
+						(100 * this.option.data.series[0] / this.option.data.max).toFixed(0) +'% <br>' + ' <span style="font-size: 40px; font-weight: 100; opacity: .7;">'+ this.option.data.series[0] +'</span><div>', // 数据的百分比 + 数据实际值
 					style: {
 							color: '#F6F7F7',
 							fontSize: '56px',
@@ -115,7 +115,7 @@ export default class OrderChart extends Vue {
 				/* eslint-disable-next-line */
 				radius: '100%',
 				innerRadius: '100%',
-				y: 80
+				y: 0
 			}]
 		}]
 	}

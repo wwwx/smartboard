@@ -8,7 +8,6 @@ import HighchartsMore from 'highcharts/highcharts-more';
 import highcharts3d from 'highcharts/highcharts-3d'
 import SolidGauge from 'highcharts/modules/solid-gauge.js';
 
-
 highcharts3d(highcharts) 
 HighchartsMore(highcharts);
 SolidGauge(highcharts)

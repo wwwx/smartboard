@@ -117,11 +117,11 @@ export default class Dashboard extends Vue {
     }
 
     getUsers() {
-        CityApi.getAllUserData()
-            .then(res => res.json())
-            .then((res: any) => {
-                this.platformData = res && res.data;
-            });
+        // CityApi.getAllUserData()
+        //     .then(res => res.json())
+        //     .then((res: any) => {
+        //         this.platformData = res && res.data;
+        //     });
     }
 }
 </script>
