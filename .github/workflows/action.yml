@@ -43,8 +43,8 @@ jobs:
         flags: '-avzr --delete'
         options: ''
         ssh_options: '-p 28050'
-        src: 'dist'
-        dest: 'root@144.34.192.156:/webroot/smart-city'
+        src: 'dist/'
+        dest: 'root@144.34.192.156:/webroot/vue-smart-city'
 
     - name: Display status from deploy
       run: echo "${{ steps.deploy.outputs.status }}"
