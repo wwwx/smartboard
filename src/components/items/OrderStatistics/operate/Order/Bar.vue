@@ -47,17 +47,25 @@ export default class OrderChart extends Vue {
                         fontWeight: '100',
                     }
                 },
+
+                lineWidth :0,//去掉x轴线
             },
             yAxis: {
                 min: 0,
                 gridLineWidth: 0,
                 minorGridLineWidth: 0,
+
+                lineWidth :0,//去掉x轴线
+                tickWidth:0,//去掉刻度
                 labels: {
-                    overflow: 'justify'
-                }
+                    enabled: false
+                },//去掉刻度数字
             },
             tooltip: {
                 valueSuffix: ' 百万'
+            },
+            legend: {
+                enabled: false,
             },
             plotOptions: {
                 bar: {
@@ -72,17 +80,6 @@ export default class OrderChart extends Vue {
                     },
                     borderWidth: 0,
                 }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 100,
-                floating: true,
-                borderWidth: 0,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                shadow: true
             },
             series: [{
                 name: '订单总量',

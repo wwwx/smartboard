@@ -75,7 +75,7 @@ export default class OrderAnalysis extends Vue {
             const {code, data, msg} = await CityApi.getTodayOrderNum({ orderType: 1 });
             data.tobePayNum = 1; // TODO remove 
             this.pieOption2 = {
-                title: '平台总订单量（个）',
+                title: '今日订单',
                 series_data: [
                     ['' + data.finishNum,  data.finishNum],
                     {

@@ -3,10 +3,10 @@
         <ul class="tabs-analysis">
             
             <li class="tab-item" 
-                v-for="tab in analysisTabs" 
+                v-for="(tab, index) in analysisTabs" 
                 :key="tab.id" 
-                :class="{ active: analysisActive == tab.id }" 
-                 @click="onAnaysisTabsClick(tab.id)"
+                :class="{ active: analysisActive == index }" 
+                 @click="onAnaysisTabsClick(index)"
             >
                 <span >{{ tab.title }}</span>
                 <i class="bottom-line"></i>
@@ -15,10 +15,10 @@
 
         <ul class="tabs-analysis-subtitle">
              <li class="tab-item" 
-                v-for="tab in subAnalysisTabs" 
+                v-for="(tab, index) in subAnalysisTabs" 
                 :key="tab.id" 
-                :class="{ active: subAnalysisActive == tab.id }" 
-                 @click="onSubAnaysisTabsClick(tab.id)"
+                :class="{ active: subAnalysisActive === index }" 
+                 @click="onSubAnaysisTabsClick(index)"
             >
                 <span >{{ tab.title }}</span>
             </li>
@@ -26,23 +26,29 @@
 
 
         <div class="order-content">
-            <Order />
+            <component :is="analysisComp"></component>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import Order from './operate/Order/index.vue'
+import { VueConstructor } from 'vue';
+import OrderAnalysis from './operate/Order/index.vue'
+import OperateAnalysis from './operate/Operate/index.vue'
+import VehicleAnalysis from './operate/Vehicle/index.vue'
 
 @Component({
     components: {
-        Order
+        OrderAnalysis,
+        OperateAnalysis,
+        VehicleAnalysis,
     }
 })
 export default class Board extends Vue {
-    analysisActive = 1001
-    subAnalysisActive = 100101
+    analysisComp: VueConstructor | null = null
+    analysisActive = 0
+    subAnalysisActive = 1
     analysisTabs = [
         {title: '经营分析', id: 1001},
         {title: '热点分析', id: 1002},
@@ -57,6 +63,21 @@ export default class Board extends Vue {
     }
     onSubAnaysisTabsClick(index: number) {
         this.subAnalysisActive = index
+        this.analysisComp = this.getAnalysisComponent(index)
+    }
+
+    getAnalysisComponent(index: number): VueConstructor|null {
+        // console.log(index)
+        switch(index) {
+            case 0: return OrderAnalysis;
+            case 1: return OperateAnalysis;
+            case 2: return VehicleAnalysis;
+            default:
+            return null
+        }
+    }
+    mounted() {
+        this.onSubAnaysisTabsClick(2)
     }
 }
 </script>

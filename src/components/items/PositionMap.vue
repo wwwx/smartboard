@@ -33,28 +33,28 @@ export default class PositionMap extends Vue {
     center: any;
     points: any;
 
-    // mounted() {
-    //     // this.init();
-    // }
-    // async init() {
-    //     await this.loadMap();
+    mounted() {
+        this.init();
+    }
+    async init() {
+        await this.loadMap();
 
-    //     this.setTab1();
-    // }
+        this.setTab1();
+    }
 
-    // getCenter(points: any) {
-    //     const center = points.reduce(
-    //         (a: any, b: any, i: number) => {
-    //             const { lat, lng } = a;
-    //             const { lat: blat, lng: blng } = b;
+    getCenter(points: any) {
+        const center = points.reduce(
+            (a: any, b: any, i: number) => {
+                const { lat, lng } = a;
+                const { lat: blat, lng: blng } = b;
 
-    //             if (!i) return { lat: blat, lng: blng };
-    //             return { lat: (lat + b.lat) / 2, lng: (lng + b.lng) / 2 };
-    //         },
-    //         { lat: 0, lng: 0 }
-    //     );
-    //     return center;
-    // }
+                if (!i) return { lat: blat, lng: blng };
+                return { lat: (lat + b.lat) / 2, lng: (lng + b.lng) / 2 };
+            },
+            { lat: 0, lng: 0 }
+        );
+        return center;
+    }
 
     // async getData() {
     //     return await CityApi.getStopPage()
@@ -67,80 +67,61 @@ export default class PositionMap extends Vue {
     //     this.setTab(index);
     // }
 
-    // async loadMap() {
-    //     await AMapLoader.load({
-    //         key: "4ad9857374f6170a018c5d382813980c", // 申请好的Web端开发者Key，首次调用 load 时必填
-    //         version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
-    //         plugins: [] //插件列表
-    //     })
-    //         .then(AMap => {
-    //             this.AMap = AMap;
-    //             this.map = new AMap.Map("map", {
-    //                 mapStyle: ""
-    //             });
+    async loadMap() {
+        await AMapLoader.load({
+            key: "4ad9857374f6170a018c5d382813980c", // 申请好的Web端开发者Key，首次调用 load 时必填
+            version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+            plugins: [] //插件列表
+        })
+            .then(AMap => {
+                this.AMap = AMap;
+                this.map = new AMap.Map("map", {
+                    mapStyle: ""
+                });
 
-    //             // this.setTab(this.active);
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //         });
-    // }
+                // this.setTab(this.active);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
-    // setTab(index: number) {
-    //     switch (index) {
-    //         case 1:
-    //             this.setTab1();
-    //             break;
-    //         case 2:
-    //             this.setTab2();
-    //             break;
-    //         case 3:
-    //             this.setTab3();
-    //             break;
+    setTab(index: number) {
+        switch (index) {
+            case 1:
+                this.setTab1();
+                break;
+            case 2:
+                this.setTab2();
+                break;
 
-    //         default:
-    //             break;
-    //     }
-    // }
+            default:
+                break;
+        }
+    }
 
-    // async setTab1() {
-    //     this.map.clearMap();
-    //     const points = await CityApi.getStopPage()
-    //         .then(res => res.json())
-    //         .then(res => res.data.records);
-    //     const center = this.getCenter(points);
-    //     this.map.setZoomAndCenter(13, [center.lng, center.lat]);
-    //     points.forEach((point: { lng: number; lat: number }) => {
-    //         var marker = new this.AMap.Marker({
-    //             position: new this.AMap.LngLat(point.lng, point.lat),
-    //             title: "青岛"
-    //         });
-    //         this.map.add(marker);
-    //     });
-    // }
-    // async setTab2() {
-    //     this.map.clearMap();
-    //     const points = await CityApi.getVehicleList()
-    //         .then(res => res.json())
-    //         .then(res => res.data);
+    async setTab1() {
+        this.map.clearMap();
+        // const points = await CityApi.getVehicleList()
+        //  console.log(points)
 
-    //     const res = await Promise.all(
-    //         points.map((vehicle: any) => {
-    //             return CityApi.getVehicleLocation(vehicle.id)
-    //                 .then(res => res.json())
-    //                 .then(res =>
-    //                     res.data ? { ...vehicle, position: res.data } : null
-    //                 );
-    //         })
-    //     );
+        // const res = await Promise.all(
+        //     points.map((vehicle: any) => {
+        //         return CityApi.getVehicleLocation(vehicle.id)
+        //             .then(res => res.json())
+        //             .then(res =>
+        //                 res.data ? { ...vehicle, position: res.data } : null
+        //             );
+        //     })
+        // );
 
     //     const result = res.filter(Boolean);
 
     //     console.log(result);
         
-    // }
+    }
 
-    // setTab3() {}
+    setTab2() {}
 }
 </script>
 
@@ -174,6 +155,7 @@ export default class PositionMap extends Vue {
             font-size:50px;
             font-weight:400;
             color:rgba(0,108,255,1);
+            user-select none
         }
 
         &.active {
@@ -186,10 +168,10 @@ export default class PositionMap extends Vue {
 }
 
 #map {
-    width: 400%;
-    height: 400%;
-    transform: scale(0.25);
-    transform-origin: 0 0;
+    width: 100%;
+    height: 100%;
+    // transform: scale(0.125);
+    // transform-origin: 0 0;
 }
 
 
