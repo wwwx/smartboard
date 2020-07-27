@@ -1,14 +1,14 @@
 <template>
-    <div class="revenue d-flex justify-content-center">
+    <div class="revenue d-flex justify-content-center" v-if="orderData">
         <div class="revenue-amount d-flex justify-content-center">
             <div>
-                <NumberCard :num="averageAmount" />
+                <NumberCard :num="orderData.avgYield" />
                 <div class="revenue-title">平均公交盈收（元）</div>
             </div>
         </div>
         <div class="revenue-rate d-flex justify-content-center">
             <div>
-                <div class="rate-number">69.8%</div>
+                <div class="rate-number">{{ 100 * orderData.fillRate }}%</div>
                 <div class="rate-title">完单率</div>
             </div>
         </div>
@@ -18,13 +18,34 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import NumberCard from './NumberCard.vue'
+import { CityApi } from '@/api/city-api';
 @Component({
     components: {
         NumberCard
     }
 })
 export default class  extends Vue {
-    averageAmount = '8777'
+    orderData: any = null
+
+    async created() {
+
+        try {
+            const { code, data } = await CityApi.getOrderYield({ orderType: 3 });
+            
+            // this.orderData = data; 
+
+            // TODO mock
+            this.orderData = {
+                avgYield: 2670,
+                fillRate: 0.809
+            }
+
+        } catch (error) {
+            
+        }
+
+    }
+
 }
 </script>
 

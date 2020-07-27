@@ -10,7 +10,7 @@
                     <th>线路</th>
                 </tr>
             </thead>
-            <tbody v-if="todayTripData">
+            <tbody v-if="todayTripData" :class="{ anim: shouldAnim }">
                 <tr v-for="item in todayTripData" :key="item.id">
                     <td>{{ item.vehicleNo }}</td>
                     <td>{{ item.id }}</td>
@@ -43,6 +43,9 @@ import { CityApi } from '@/api/city-api';
 export default class TimeTable extends Vue {
     todayVehicleData: any = null
     todayTripData: any = null
+
+    shouldAnim = false
+
     async created() {
 
         try {
@@ -55,11 +58,14 @@ export default class TimeTable extends Vue {
         try {
             const { code, data, msg } = await CityApi.getTodayTripInfos({ tripType: 3 }); 
             // console.log(data)
-            this.todayTripData = data.slice(0,5)
+            this.todayTripData = data.slice(0,4)
         } catch (error) {
             
         }
 
+        setTimeout(() => {
+            // this.shouldAnim = true;
+        }, 3000)
 
     }
 }
@@ -67,6 +73,7 @@ export default class TimeTable extends Vue {
 
 <style lang="stylus" scoped>
 .time-table {
+    position: relative;
     width: 100%;
     font-size:42px;
     font-weight:400;
@@ -75,23 +82,51 @@ export default class TimeTable extends Vue {
     table {
 
 
-    width: 100%;
-    height: 496px;
-    border: 2px solid #002465;
+        width: 100%;
+        height: 496px;
+        overflow hidden
+        border: 2px solid #002465;
 
-    thead tr {
-        background #002465
-        height 88px
+        thead tr {
+            background #002465
+            height 88px
+            position: relative
+            z-index 1
+            th {
+                font-weight: 400;
+            }
+        }
+
+        tbody {
+            position: relative
+            z-index 0
+            height 400px;
+            transition: transform .5s;
+
+            &.anim {
+                transform: translateY(-400px);
+
+            }
+            
+            
+            tr {
+                border-bottom: 2px solid #002465;
+                height 88px
+
+                td {
+                    font-weight: 300;
+                }
+            }
+        }
+
+        
+        td {
+            text-align center
+        }
     }
 
-    tbody tr {
-        border-bottom: 2px solid #002465;
-    }
-
-    
-    td {
-        text-align center
-    }
+    .tbody-wrap {
+        overflow hidden
     }
 }
 

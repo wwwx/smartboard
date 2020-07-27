@@ -21,6 +21,18 @@ export class CityApi {
     return Http.$get(`${BASE}/order/line-order-num`, params);
   }
 
+  static getOrderYield(params = {}) {
+    return Http.$get(`${BASE}/order/order-yield`, params);
+  }
+
+  static getUserNum(params = {}) {
+    return Http.$get(`${BASE}/order/user-num`, params);
+  }
+
+  static getOrderDayLive(params = {}) {
+    return Http.$get(`${BASE}/order/order-day-live`, params);
+  }
+
   static getVehicleList(params = {}) {
     return Http.$post(`${BASE}/schedule/vehicle-list`, params);
   }
@@ -31,6 +43,38 @@ export class CityApi {
 
   static getTodayTripInfos(params = {}) {
     return Http.$get(`${BASE}/schedule/today-tripInfos`, params);
+  }
+
+  static getAvgVehicleNum(params = {}) {
+    return Http.$get(`${BASE}/schedule/avg-vehicle-num`, params);
+  }
+
+  static getLoadRate(params = {}) {
+    return Http.$get(`${BASE}/schedule/load-rate`, params);
+  }
+
+  static getTurnOverNum(params = {}) {
+    return Http.$get(`${BASE}/schedule/turnover-num`, params);
+  }
+
+  static getSeatPeakRate(params = {}) {
+    return Http.$get(`${BASE}/schedule/seat-peak-rate`, params);
+  }
+
+  static getVehicleStatus(params = {}) {
+    return Http.$get(`${BASE}/schedule/vehicle-status`, params);
+  }
+
+  static getSeatNum(params = {}) {
+    return Http.$get(`${BASE}/schedule/seat-num`, params);
+  }
+
+  static getLineCollect(params = {}) {
+    return Http.$get(`${BASE}/schedule/line-collect`, params);
+  }
+
+  static getLineRate(params = {}) {
+    return Http.$get(`${BASE}/schedule/line-rate`, params);
   }
 
 }

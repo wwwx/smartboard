@@ -2,9 +2,9 @@
     <div>
         <div :id="id"></div>
         <div class="numbers d-flex">
-            <span>1999</span>
-            <span>1999</span>
-            <span>1999</span>
+            <span>{{ option.onlineNum }}</span>
+            <span>{{ option.offlineNum }}</span>
+            <span>{{ option.exceptionNum }}</span>
         </div>
     </div>
 </template>
@@ -16,12 +16,20 @@ var Highcharts = require('highcharts');
 export default class  extends Vue {
     @Prop() id!:string
     @Prop() option!:any
+
     mounted() {
-        // console.log(JSON.stringify(this.option.data, null, 2))
+
+
+        
         this.drawChart()
     }
 
     drawChart(data: any = {}) {
+
+        const total = this.option.exceptionNum + this.option.offlineNum + this.option.onlineNum
+
+
+
         var chart = Highcharts.chart(this.id, {
             credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
@@ -43,7 +51,7 @@ export default class  extends Vue {
                         fontWeight: '100',
                     }
                 },
-
+                
                 lineWidth :0,//去掉x轴线
                 
             },
@@ -79,11 +87,13 @@ export default class  extends Vue {
             },
             series: [{
                 name: '',
-                data: [5, 3, 4],
+                // data: [5, 3, 4],
+                data: [ total-this.option.onlineNum, total-this.option.offlineNum, total-this.option.exceptionNum ],
                 color: '#023660'
             }, {
                 name: '',
-                data: [2, 2, 3],
+                // data: [2, 4, 3],
+                data: [this.option.onlineNum, this.option.offlineNum, this.option.exceptionNum],
                 color: '#04C9DF'
             }]
         });
@@ -96,7 +106,7 @@ export default class  extends Vue {
 
 .numbers {
     position: absolute;
-    right: 6px;
+    right: 30px;
     bottom: 198px;
     flex-direction column
     span {
@@ -104,6 +114,7 @@ export default class  extends Vue {
         font-weight:200;
         color:rgba(247,248,248,1);
         margin-top: 94px;
+        text-align: left;
     }
 }
 </style>

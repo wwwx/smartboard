@@ -3,11 +3,11 @@
         <div id="a_peak"></div>
         <div class="legend d-flex">
             <div class="morning">
-                <div class="title">早高峰满载率：89%</div>
+                <div class="title">早高峰满载率：{{ option.morningPeakRate.replace('%', '') }}%</div>
                 <div class="time">06:00-08:00</div>
             </div>
             <div class="evening">
-                <div class="title">晚高峰满载率：89%</div>
+                <div class="title">晚高峰满载率：{{ option.nightPeakRate.replace('%', '') }}%</div>
                 <div class="time">16:00-19:30</div>
             </div>
         </div>
@@ -17,14 +17,27 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Highcharts from 'highcharts'
+import { CityApi } from '@/api/city-api';
 @Component
 export default class extends Vue {
-    mounted() {
+    @Prop() option!: any
+    
+    async mounted() {
+        
+        this.activityOption.series[0].data[0].y = +this.option.morningPeakRate.replace('%', '')
+        this.activityOption.series[1].data[0].y = +this.option.nightPeakRate.replace('%', '')
+        
+        
+
         this.drawChart()
     }
 
+    
+
     drawChart() {
-		const self = this
+        const self = this
+        
+        // console.log(JSON.stringify(this.activityOption, null, 2))
 
         // 去掉这里的注释就是类似 Apple Watch 上的效果了
 		Highcharts.setOptions({
@@ -43,9 +56,6 @@ export default class extends Vue {
 				}
 			}
 		});
-		// this.activityOption.series[0].borderColor = this.colors[0]
-		// this.activityOption.series[0].data[0].y = 80
-		// this.activityOption.yAxis.max = 100
 
 		Highcharts.chart('a_peak', this.activityOption, function(c) {
 			
@@ -124,7 +134,7 @@ export default class extends Vue {
                 // color:'yellow',
                 radius: '100%',
                 innerRadius: '100%',
-                y: 80
+                y: 0
             }]
         }, {
             name: '晚高峰满载率',
@@ -133,7 +143,7 @@ export default class extends Vue {
                 color: '#E6BF42',
                 radius: '80%',
                 innerRadius: '80%',
-                y: 65
+                y: 0 
             }]
         }]
 	}

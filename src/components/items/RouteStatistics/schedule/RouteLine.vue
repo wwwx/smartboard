@@ -221,7 +221,7 @@ export default class RouteLine extends Vue {
         top: 0;
         width: 80px;
         height: 80px;
-        background-image: url('~@/assets/bus.png');
+        background-image: url('~@/assets/WechatIMG40.png');
         background-repeat: no-repeat;
         background-size: contain;
         visibility hidden

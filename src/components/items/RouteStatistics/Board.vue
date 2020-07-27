@@ -54,7 +54,7 @@ export default class Board extends Vue {
         }
     }
     mounted() {
-        this.onTabsClick(0)
+        this.onTabsClick(1)
     }
 }
 </script>
