@@ -4,8 +4,8 @@
             <!-- header start -->
             <smart-item :width="7155" :height="240">
                 <div class="subtitle">
-                    <span>智慧班车 / </span>
-                    <span>智慧公交</span>
+                    <!-- <span>智慧班车 / </span> -->
+                    <span class="active">智慧公交</span>
                 </div>
                 <h1 class="header-title">城市智慧出行数据可视监控平台</h1>
                 <h3 class="header-time"> {{ nowTime }}</h3>
@@ -166,17 +166,14 @@ h1.header-title {
     position: absolute;
     left: 82px;
     bottom: 32px;
-    span:nth-child(1) {
+    span {
         font-size:83px;
         font-weight:400;
-        color:rgba(246,247,247,1);
-        opacity:0.5;
-    }
+        color:rgba(246,247,247,.5);
 
-    span:nth-child(2) {
-        font-size:83px;
-        font-weight:400;
-        color:rgba(246,247,247,1);
+        &.active {
+            color:rgba(246,247,247,1);
+        }
     }
 }
 

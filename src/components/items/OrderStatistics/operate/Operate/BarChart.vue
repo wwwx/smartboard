@@ -1,13 +1,11 @@
 <template>
-    <div>
-        skfsdkljl
-        <div id="container_111" style="min-width:400px;height:400px"></div>
-    </div>
+    <div :id="id"></div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import Highcharts from 'highcharts'
+var Highcharts = require('highcharts')
+@Component
 export default class BarChart extends Vue {
     @Prop() id!:string
     @Prop() option!:any
@@ -18,47 +16,85 @@ export default class BarChart extends Vue {
     }
 
     drawChart() {
+
+        const dateList = this.option.data.map((item: any) => item.date.slice(5))
+        const countList = this.option.data.map((item: any) => item.count)
+        const dayLiveList = this.option.data.map((item: any) => +item.dayLive.replace('%', ''))
+
+        // console.log(countList, dayLiveList)
         
 
-        var chart = Highcharts.chart('container_111', {
+        Highcharts.chart(this.id, {
+            credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
-                zoomType: 'xy'
+                zoomType: 'xy',
+                width: 1900,
+                height: 760,
+                marginLeft: 150,
             },
             title: {
                 text: '获客量/日活率',
-                align: 'left'
+                align: 'left',
+                style: {
+                    color: 'rgba(246,247,247,1)',
+                    fontSize: '50px',
+                    fontWeight: '100',
+                }
             },
             xAxis: [{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                crosshair: true
-            }],
-            yAxis: [{ // Primary yAxis
+                // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                //             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                categories: dateList,
+                crosshair: true,
+                
+                title: {
+                    text: null
+                },
                 labels: {
-                    format: '{value}',
+                    rotation: -45,
                     style: {
-                        color: (Highcharts as any).getOptions().colors[1]
+                        color: 'rgba(246,247,247,.7)',
+                        fontSize: '32px',
+                        fontWeight: '100',
                     }
                 },
+            }],
+            yAxis: [{ // Primary yAxis
+
                 title: {
                     text: '获客量',
                     style: {
-                        color: (Highcharts as any).getOptions().colors[1]
+                        color: 'rgba(246,247,247,.7)',
+                        fontSize: '32px',
+                        fontWeight: '100',
                     }
                 },
+                labels: {
+                    style: {
+                        color: 'rgba(246,247,247,1)',
+                        fontSize: '32px',
+                        fontWeight: '100',
+                    }
+                },
+                
             }, { // Secondary yAxis
                 title: {
                     text: '日活率',
                     style: {
-                        color: (Highcharts as any).getOptions().colors[0]
+                        color: 'rgba(246,247,247,.7)',
+                        fontSize: '32px',
+                        fontWeight: '100',
                     }
                 },
                 labels: {
                     format: '{value} %',
                     style: {
-                        color: (Highcharts as any).getOptions().colors[0]
+                        color: 'rgba(246,247,247,1)',
+                        fontSize: '32px',
+                        fontWeight: '100',
                     }
                 },
+                
                 opposite: true
             }],
             tooltip: {
@@ -74,21 +110,27 @@ export default class BarChart extends Vue {
                 floating: true,
                 backgroundColor:  '#FFFFFF'
             },
+            
             series: [{
                 name: '获客量',
                 type: 'column',
-                yAxis: 1,
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                color: '#01FFFF',
+                // data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                data: countList,
                 tooltip: {
                     valueSuffix: ''
                 }
             }, {
                 name: '日活率',
                 type: 'spline',
-                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                color: '#DEC943',
+                yAxis: 1,
+                // data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                data: dayLiveList,
                 tooltip: {
                     valueSuffix: '%'
-                }
+                },
+                
             }]
         });
     }

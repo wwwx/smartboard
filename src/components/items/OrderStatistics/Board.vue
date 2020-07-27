@@ -51,7 +51,7 @@ export default class Board extends Vue {
     subAnalysisActive = 1
     analysisTabs = [
         {title: '经营分析', id: 1001},
-        {title: '热点分析', id: 1002},
+        // {title: '热点分析', id: 1002}, // TODO
     ]
     subAnalysisTabs = [
         {title: '订单', id: 100101},
@@ -77,7 +77,7 @@ export default class Board extends Vue {
         }
     }
     mounted() {
-        this.onSubAnaysisTabsClick(2)
+        this.onSubAnaysisTabsClick(1)
     }
 }
 </script>

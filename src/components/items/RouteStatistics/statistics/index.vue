@@ -3,7 +3,7 @@
 
         <div class="block-title">线路统计</div>
         <div class="d-flex justify-content-center" >
-            <Bubble />
+            <Bubble v-if="lineOption" :option="lineOption" />
         </div>  
 
 
@@ -19,6 +19,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Activity from './Activity.vue'
 import Bubble from './Bubble.vue'
+import { CityApi } from '../../../../api/city-api';
 
 @Component({
     components: {
@@ -27,20 +28,46 @@ import Bubble from './Bubble.vue'
     }
 })
 export default class  extends Vue {
-    activityOption1 = {
-        title: '庄子—百果园森林公园',
-        data: {
-            max: 123,
-            series: [33]
-        },
+
+    lineOption: any = null
+
+    created() {
+        this.getCollect()
+        this.getRate()
     }
-    activityOption2 = {
-        title: '605路',
-        data: {
-            max: 123,
-            series: [33]
-        },
+
+    async getCollect() {
+        const { data: { avgSpeed, avgStopLength, lineTotalLength, lineTotalNum } } = await CityApi.getLineCollect({ lineType: 3 });
+        // console.log(data)
+        // this.lineOption = { avgSpeed, avgStopLength, lineTotalLength, lineTotalNum } // TODO 数据不完整
+        this.lineOption = { avgSpeed: 410, avgStopLength: 123, lineTotalLength: 1766.1, lineTotalNum: 345 }
+
     }
+
+    async getRate() {
+        const { data } = await CityApi.getLineRate({ lineType: 3 }) // TODO 没有数据
+        // console.log(data)
+        this.activityOption1 = {
+            title: '庄子—百果园森林公园',
+            data: {
+                max: 100,
+                series: [33]
+            },
+        }
+
+        this.activityOption2 = {
+            title: '605路',
+            data: {
+                max: 100,
+                series: [53]
+            },
+        }
+    }
+
+
+
+    activityOption1: any = null
+    activityOption2: any = null
 }
 </script>
 

@@ -10,11 +10,16 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 var Highcharts = require('highcharts')
 @Component
 export default class  extends Vue {
+    @Prop() option!: any
+
     mounted() {
         this.drawChart()
     }
 
     drawChart() {
+
+
+
        Highcharts.chart('bubble_1', {
 
 		    credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
@@ -75,7 +80,7 @@ export default class  extends Vue {
                     color: '#0263F1',
                     data: [{
                         name: '线路总数',
-                        value: 410
+                        value: this.option.lineTotalNum
                     }]
                 },
                 {
@@ -83,7 +88,7 @@ export default class  extends Vue {
                     color: '#4E4FD9',
                     data: [{
                         name: '平均站点距离',
-                        value: 444
+                        value: this.option.avgStopLength
                     }]
                 },
                 {
@@ -91,7 +96,7 @@ export default class  extends Vue {
                     color: '#CD953F',
                     data: [{
                         name: '线网长度',
-                        value: 1767.1
+                        value: this.option.lineTotalLength
                     }]
                 },
                 {
@@ -99,7 +104,7 @@ export default class  extends Vue {
                     color: '#00CFDB',
                     data: [{
                         name: '平均运行车速（km/h）',
-                        value: 430
+                        value: this.option.avgSpeed
                     }]
                 },
             ]

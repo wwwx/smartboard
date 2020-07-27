@@ -2,13 +2,13 @@
     <div class="load d-flex justify-content-around">
         <div class="load-rate d-flex justify-content-center">
             <div>
-                <div class="rate-number">69.8%</div>
+                <div class="rate-number">{{ loadRate }}%</div>
                 <div class="rate-title">平均满载率</div>
             </div>
         </div>
         <div class="load-rate d-flex justify-content-center">
             <div>
-                <div class="rate-number">10辆</div>
+                <div class="rate-number">{{ avgVehicleNum }}辆</div>
                 <div class="rate-title">平均发车频率（辆/h）</div>
             </div>
         </div>
@@ -17,9 +17,27 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { CityApi } from '@/api/city-api';
 @Component
 export default class  extends Vue {
-    
+    avgVehicleNum: any = null
+    loadRate: any = null
+
+    async created() {
+        
+        try {
+            const { data: { avgVehicleNum } } = await CityApi.getAvgVehicleNum({ tripType: 3 });
+            this.avgVehicleNum = avgVehicleNum
+            
+            // const { data: { loadRate } } = await CityApi.getLoadRate({ tripType: 1 }); // TODO 服务端 500
+            // console.log(loadRate)
+            this.loadRate = 67.1
+
+        } catch (error) {
+            
+        }
+
+    }
 }
 </script>
 
@@ -32,7 +50,6 @@ export default class  extends Vue {
     margin-top 40px
     text-align center
 }
-.load-title,
 .rate-title {
     margin-top 40px
     font-size:54px;

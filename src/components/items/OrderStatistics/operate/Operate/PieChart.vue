@@ -1,30 +1,49 @@
 <template>
-    <div id="pie_chart_1" style="min-width:400px;height:400px"></div>
+    <div :id="id"></div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-var Highcharts = require('highcharts');
-export default class PieChart extends Vue {
-    
-
+var Highcharts = require('highcharts')
+@Component
+export default class OrderChart extends Vue {
+    @Prop() id!: string;
+    @Prop() option!: any;
+    @Prop() colors!: string[];
     mounted() {
-        this.drawChart();
+        this.drawChart()
     }
 
     drawChart() {
-        Highcharts.chart('pie_chart_1', this.option);
-    }
+        // 创建渐变色
+        // Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color: string) {
+        //     return {
+        //         radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+        //         stops: [
+        //             [0, color],
+        //             [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        //         ]
+        //     };
+        // });
+        const { colors } = this
+        Highcharts.setOptions({ colors  });
+        // 构建图表
+        var chart = Highcharts.chart(this.id,{
 
-    option = {
+            credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
+                width: 1000,
+                height: 600,
+
             },
             title: {
-                text: '2018年1月浏览器市场份额'
+                text: this.option.title,
+                align: 'left',
+                style: {
+                    color: 'rgba(246,247,247,1)',
+                    fontSize: '50px',
+                    fontWeight: '100',
+                }
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -33,49 +52,45 @@ export default class PieChart extends Vue {
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
+                    size: 360,
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        // format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        format: '{y}',
                         style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        }
+                            color: 'rgba(246,247,247,.7)',
+                            fontSize: '32px',
+                            fontWeight: '200',
+                        },
+                        connectorColor: 'silver',
                     }
                 }
             },
+            legend: {
+                itemStyle: {
+                    fontWeight: '100',
+                    fontSize: '32px',
+                    color: 'rgba(255,255,255,.6)',
+                },
+                itemHoverStyle: {
+                    color: 'white'
+                },
+                itemDistance: 20,
+                squareSymbol: true,
+            },
             series: [{
-                name: 'Brands',
-                colorByPoint: true,
-                data: [{
-                    name: 'Chrome',
-                    y: 61.41,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Internet Explorer',
-                    y: 11.84
-                }, {
-                    name: 'Firefox',
-                    y: 10.85
-                }, {
-                    name: 'Edge',
-                    y: 4.67
-                }, {
-                    name: 'Safari',
-                    y: 4.18
-                }, {
-                    name: 'Sogou Explorer',
-                    y: 1.64
-                }, {
-                    name: 'Opera',
-                    y: 1.6
-                }, {
-                    name: 'QQ',
-                    y: 1.2
-                }, {
-                    name: 'Other',
-                    y: 2.61
-                }]
+                type: 'pie',
+                name: '',
+                startAngle: 270, // 起始角度
+                showInLegend: true,
+                data: [ ...this.option.data ]
             }]
-        }
+        });
+
+    }
 }
 </script>
+
+<style lang="stylus" scoped>
+
+</style>

@@ -16,11 +16,11 @@
         <div class="daypeak d-flex ">
             <div class="activity">
                 <div class="block-title" >早晚高峰满载率</div>
-                <PeakActivityChart />
+                <PeakActivityChart v-if="peakOption" :option="peakOption" />
             </div>
             <div class="bar pr">
                 <div class="block-title" >在线车辆数据统计</div>
-                <BarChart id="vehicle_bar_chart" style="margin-top: 100px;" />
+                <BarChart id="vehicle_bar_chart" style="margin-top: 100px;" v-if="vehicleOption" :option="vehicleOption" />
             </div>
         </div>
 
@@ -34,6 +34,7 @@ import LoadRate from './LoadRate.vue'
 import ActivityChart from '../Order/Activity.vue'
 import BarChart from './Bar.vue'
 import PeakActivityChart from './Activity.vue'
+import { CityApi } from '@/api/city-api';
 
 @Component({
     components: {
@@ -45,27 +46,81 @@ import PeakActivityChart from './Activity.vue'
     }
 })
 export default class VehicleAnalysis extends Vue {
-    activityOption1 = {
-        title: '工作日',
-        data: {
-            max: 123,
-            series: [33]
-        },
+
+    created() {
+        this.getTurnOver();
+        this.getPeak();
+        this.getVehicle();
     }
-    activityOption2 = {
-        title: '工作日',
-        data: {
-            max: 123,
-            series: [33]
-        },
+
+    async getVehicle() {
+        const { data: { exceptionNum, offlineNum, onlineNum } } = await CityApi.getVehicleStatus({ vehicleType: 3 })
+        // console.log(exceptionNum, offlineNum, onlineNum)
+        
+        this.vehicleOption = {
+            exceptionNum, 
+            offlineNum, 
+            onlineNum
+        }
     }
-    activityOption3 = {
-        title: '工作日',
-        data: {
-            max: 123,
-            series: [33]
-        },
+
+    async getPeak() {
+
+        const { data: { morningPeakRate, nightPeakRate } } = await CityApi.getSeatPeakRate({ tripType: 3 })
+        this.peakOption = {
+            morningPeakRate,
+            nightPeakRate
+        }
     }
+
+    async getTurnOver() {
+        try {
+            const { data : { holidayNum, restDayNum, workdayNum }} = await CityApi.getTurnOverNum({ tripType: 3 })
+            // console.log(data)
+            const all = holidayNum + restDayNum + workdayNum
+            // console.log(all)
+
+            this.activityOption1 = {
+                title: '工作日',
+                data: {
+                    max: all,
+                    series: [workdayNum]
+                },
+            }   
+            this.activityOption2 = {
+                title: '休息日',
+                data: {
+                    max: all,
+                    series: [restDayNum]
+                },
+            }   
+            this.activityOption3 = {
+                title: '节假日',
+                data: {
+                    max: all,
+                    series: [holidayNum]
+                },
+            }   
+
+            this.activityOption1.data.series[0] = workdayNum
+            this.activityOption2.data.series[0] = restDayNum
+            this.activityOption3.data.series[0] = holidayNum
+
+
+            // console.log(JSON.stringify(this.activityOption1, null, 2))
+
+
+        } catch (error) {
+            
+        }
+    }
+
+    peakOption: any = null
+    vehicleOption: any = null
+
+    activityOption1: any = null
+    activityOption2: any = null
+    activityOption3: any = null
 }
 </script>
 

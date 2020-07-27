@@ -51,7 +51,7 @@ export default class OrderAnalysis extends Vue {
 
         // 平台总订单数据
         try {
-            const {code, data, msg} = await CityApi.getAllOrderNum({ orderType: 1 });
+            const {code, data, msg} = await CityApi.getAllOrderNum({ orderType: 3 });
             this.pieOption1 = {
                 title: '平台总订单量（个）',
                 series_data: [
@@ -72,7 +72,7 @@ export default class OrderAnalysis extends Vue {
         // 今日订单数据
         try {
             
-            const {code, data, msg} = await CityApi.getTodayOrderNum({ orderType: 1 });
+            const {code, data, msg} = await CityApi.getTodayOrderNum({ orderType: 3 });
             data.tobePayNum = 1; // TODO remove 
             this.pieOption2 = {
                 title: '今日订单',
@@ -93,26 +93,26 @@ export default class OrderAnalysis extends Vue {
 
         // 节假休息日数据
         try {
-            const {code, data, msg} = await CityApi.getHolidayOrderNum({ orderType: 1 });
+            const {data: { totalNum, workdayNum, restDayNum, holidayNum }} = await CityApi.getHolidayOrderNum({ orderType: 3 });
             this.activityOption1 = {
                 title: '工作日',
                 data: {
-                    max: data.totalNum,
-                    series: [data.workdayNum]
+                    max: totalNum,
+                    series: [workdayNum]
                 },
             }
             this.activityOption2 = {
                 title: '休息日',
                 data: {
-                    max: data.totalNum,
-                    series: [data.restDayNum],
+                    max: totalNum,
+                    series: [restDayNum],
                 },
             }
             this.activityOption3 = {
                 title: '节假日',
                 data: {
-                    max: data.totalNum,
-                    series: [data.holidayNum]
+                    max: totalNum,
+                    series: [holidayNum]
                 },
             }
 

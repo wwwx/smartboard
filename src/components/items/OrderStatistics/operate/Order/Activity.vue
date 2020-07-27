@@ -43,7 +43,6 @@ export default class OrderChart extends Vue {
 		});
 		this.activityOption.series[0].borderColor = this.colors[0]
 		this.activityOption.series[0].data[0].y = this.option.data.series[0]
-		// this.activityOption.yAxis.max = this.option.data.max
 
 		Highcharts.chart(this.id, this.activityOption, function(c) {
 			
@@ -81,7 +80,7 @@ export default class OrderChart extends Vue {
 		},
 		yAxis: {
 			min: 0,
-			max: 100, // 数据总量
+			max: this.option.data.max, // 数据总量
 			lineWidth: 0,
 			tickPositions: []
 		},

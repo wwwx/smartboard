@@ -24,7 +24,7 @@ export default class OrderChart extends Vue {
                 borderWidth: 0,
             },
             title: {
-                text: '总订单量',
+                text: '线路订单量',
                 align: 'left',
                 style: {
                     fontSize: '44px',
