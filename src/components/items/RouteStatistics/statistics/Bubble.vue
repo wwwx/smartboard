@@ -41,6 +41,9 @@ export default class  extends Vue {
                     fontSize: '32px',
                     color: 'rgba(255,255,255,.6)'
                 },
+                itemHoverStyle: {
+                    color: 'white'
+                },
                 itemDistance: 20,
             },
             plotOptions: {

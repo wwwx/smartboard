@@ -84,6 +84,7 @@ import {
 } from '@/components/items'
 import { CityApi } from "@/api/city-api";
 import moment from "moment";
+import { EventBus } from '../eventBus'
 
 @Component({
     components: {
@@ -102,6 +103,20 @@ export default class Dashboard extends Vue {
     mounted() {
         this.formatTime();
         this.getUsers();
+        this.realTime()
+    }
+
+    realTime() {
+
+        setInterval(() => {
+            console.log('refresh....')
+
+            EventBus.$emit('refresh')
+
+
+            
+        }, 2 * 1000)
+
     }
 
     formatTime() {

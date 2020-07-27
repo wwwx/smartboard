@@ -20,6 +20,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import Activity from './Activity.vue'
 import Bubble from './Bubble.vue'
 import { CityApi } from '../../../../api/city-api';
+import { EventBus } from '../../../../eventBus'
 
 @Component({
     components: {
@@ -32,8 +33,15 @@ export default class  extends Vue {
     lineOption: any = null
 
     created() {
+
         this.getCollect()
         this.getRate()
+
+        EventBus.$on('refresh', () => {
+            // console.log('ok')
+            this.lineOption = { avgSpeed: 410, avgStopLength: 1123, lineTotalLength: 2766.1, lineTotalNum: 345 }
+        })
+
     }
 
     async getCollect() {
