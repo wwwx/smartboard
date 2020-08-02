@@ -1,11 +1,11 @@
 <template>
     <div>
 
-        <div style="position: absolute; left: 0; right: 24px; top: 184px;">
+        <div style="position: absolute; left: 0; right: 12px; top: 90px;">
             <RouteLine />
         </div>
 
-        <div style="position: absolute; left: 0; right: 24px; bottom: 0;">
+        <div style="position: absolute; left: 0; right: 12px; bottom: 0;">
             <TimeTable />
         </div>
     </div>

@@ -2,11 +2,11 @@
     <div class="route-line">
         <h3 class="title">今日排班</h3>
 
-        <div class="line-title 1-1" style="width: 280px; top: 144px;">庄子—百果山 森林公园</div>
-        <div class="line-title 1-2" style="width: 270px; top: 444px;">百果山森林公园—庄子</div>
-        <div class="line-title 2-0" style="width: 259px; top: 750px; font-size: 61px;">605路</div>
-        <div class="line-title 2-1" style="width: 259px; top: 860px; left: 30px; color: white;">上行</div>
-        <div class="line-title 2-2" style="width: 259px; top: 1200px; left: 30px; color: white;">下行</div>
+        <div class="line-title 1-1" style="width: 140px; top: 76px;">青岛院士港</div>
+        <div class="line-title 1-2" style="width: 140px; top: 210px;">青岛院士港</div>
+        <div class="line-title 2-0" style="width: 140px; top: 350px; font-size: 28px;">605路</div>
+        <div class="line-title 2-1" style="width: 140px; top: 410px; left: 30px; color: white;">上行</div>
+        <div class="line-title 2-2" style="width: 140px; top: 567px; left: 30px; color: white;">下行</div>
 
         <div class="line-container">
 
@@ -14,10 +14,10 @@
             <div class="line line-1-1 line-right">
                 <div class="line-inner">
                     <div v-for="(node, index) in nodeList" :key="index">
-                        <div class="line-node" :style="{ left: 172 * index + 'px' }"> 
+                        <div class="line-node" :style="{ left: 84 * index + 'px' }"> 
                             <span></span>
                         </div>
-                        <div class="line-station" :style="{ left: 172 * index + 10 + 'px' }">
+                        <div class="line-station" :style="{ left: 84 * index+ 3 + 'px' }">
                             {{ node.title }}
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="line-end"></div>
                 <div class="line-buses up">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index - 2 + 'px', visibility: ([5,7].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 84 * index - 9 + 'px', visibility: ([1,7].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
                 
@@ -35,7 +35,7 @@
             <div class="line line-1-2 line-left">
                 <div class="line-inner">
                     <div class="line-node" v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index + 80 + 'px' }"
+                        :style="{ left: 84 * index + 32 + 'px' }"
                     > 
                         <span></span>
                     </div>
@@ -43,7 +43,7 @@
                 <div class="line-start"></div>
                 <div class="line-buses down">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index+ 78 + 'px', visibility: ([3].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 84 * index+ 28 + 'px', visibility: ([3, 8].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
             </div>
@@ -52,10 +52,10 @@
             <div class="line line-2-1 line-right">
                 <div class="line-inner">
                     <div v-for="(node, index) in nodeList" :key="index">
-                        <div class="line-node" :style="{ left: 172 * index + 'px' }"> 
+                        <div class="line-node" :style="{ left: 84 * index + 'px' }"> 
                             <span></span>
                         </div>
-                        <div class="line-station" :style="{ left: 172 * index + 10 + 'px' }">
+                        <div class="line-station" :style="{ left: 84 * index+ 3 + 'px' }">
                             {{ node.title }}
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                 <div class="line-end"></div>
                 <div class="line-buses up">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index - 2 + 'px', visibility: ([2,7].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 84 * index - 9 + 'px', visibility: ([2,5].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="line line-2-2 line-left">
                 <div class="line-inner">
                     <div class="line-node" v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index + 80 + 'px' }"
+                        :style="{ left: 84 * index + 32 + 'px' }"
                     > 
                         <span></span>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="line-start"></div>
                 <div class="line-buses down">
                     <span v-for="(node, index) in nodeList" :key="index"
-                        :style="{ left: 172 * index+ 78 + 'px', visibility: ([6,9].indexOf(index) > -1) && 'visible' }"
+                        :style="{ left: 84 * index+ 28 + 'px', visibility: ([4,6,9].indexOf(index) > -1) && 'visible' }"
                     ></span>
                 </div>
             </div>
@@ -116,47 +116,47 @@ export default class RouteLine extends Vue {
     // font-size: 58px;
 }
 .title {
-    font-size:61px;
+    font-size:28px;
     font-weight:400;
     color:rgba(246,247,247,1);
 }
 .line-title {
-    font-size:46px;
+    font-size:22px;
     font-weight:400;
     color:rgba(0,255,255,1);
     position absolute
     line-height 1.2em
 }
 .line {
-    margin-top: 80px;
-    width: 2138px;
-    height: 5px;
+    margin-top: 40px;
+    width: 990px;
+    height: 2px;
     background-color: #02FFFF;
     position: relative;
-    left: 300px;
+    left: 150px;
 
 }
 .line-1-2,
 .line-2-2 {
-    left: 224px;
+    left: 120px;
 }
 .line-1-1 {
-    margin-top: 140px;
+    margin-top: 80px;
 }
 .line-1-2,
 .line-2-1,
 .line-2-2 {
-    margin-top: 340px;
+    margin-top: 158px;
 }
 .line-inner {
     position: relative;
-    left: 120px;
+    left: 50px;
 }
 
 .line-end {
-    margin-top: 80px;
-    width: 120px;
-    height: 5px;
+    margin-top: 40px;
+    width: 60px;
+    height: 2px;
     background-color: #02FFFF;
     position: absolute;
     bottom: 0;
@@ -165,9 +165,9 @@ export default class RouteLine extends Vue {
     transform-origin right;
 }
 .line-start {
-    margin-top: 80px;
-    width: 120px;
-    height: 5px;
+    margin-top: 40px;
+    width: 60px;
+    height: 2px;
     background-color: #02FFFF;
     position: absolute;
     bottom: 0;
@@ -178,21 +178,21 @@ export default class RouteLine extends Vue {
 .line-node {
     box-sizing: border-box;
     display: inline-block;
-    width: 54px;
-    height: 54px;
+    width: 24px;
+    height: 24px;
     border: 2px solid #02FFFF;
     border-radius: 50%;
     position: absolute;
-    top: -24px;
+    top: -11px;
 
     // padding: 10px;
     span {
         position: absolute;
-        top: 12px;
-        left: 12px;
+        top: 4px;
+        left: 4px;
         display: inline-block;
-        width: 26px;
-        height: 26px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         background-color: #02FFFF;
     }
@@ -201,9 +201,10 @@ export default class RouteLine extends Vue {
 .line-station {
     display inline-block;
     position: absolute;
-    top: 48px;
-    height 270px
-    font-size:36px;
+    top: 24px;
+    
+    height 124px
+    font-size:16px;
     font-weight:400;
     color:rgba(255,255,255,1);
     writing-mode: tb-rl; 
@@ -214,25 +215,25 @@ export default class RouteLine extends Vue {
 
 .line-buses {
     position: relative;
-    left: 108px;
+    left: 48px;
 
     span {
         position: absolute;
         top: 0;
-        width: 80px;
-        height: 80px;
-        background-image: url('~@/assets/WechatIMG40.png');
+        width: 40px;
+        height: 40px;
+        background-image: url('~@/assets/bus.png');
         background-repeat: no-repeat;
         background-size: contain;
         visibility hidden
     }
 
     &.up {
-        top:-96px;
+        top:-42px;
     }
 
     &.down {
-        top:26px;
+        top:4px;
 
         span {
             transform rotate(180deg)

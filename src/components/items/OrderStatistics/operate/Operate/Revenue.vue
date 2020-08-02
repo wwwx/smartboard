@@ -31,14 +31,7 @@ export default class  extends Vue {
 
         try {
             const { code, data } = await CityApi.getOrderYield({ orderType: 3 });
-            
-            // this.orderData = data; 
-
-            // TODO mock
-            this.orderData = {
-                avgYield: 2670,
-                fillRate: 0.809
-            }
+            this.orderData = data; 
 
         } catch (error) {
             
@@ -51,23 +44,23 @@ export default class  extends Vue {
 
 <style lang="stylus" scoped>
 .revenue-amount {
-    margin-right 320px
+    margin-right 220px
 }
 .revenue-amount,
 .revenue-rate {
-    min-width: 400px;
-    margin-top 40px
+    min-width: 200px;
+    margin-top 20px
     text-align center
 }
 .revenue-title,
 .rate-title {
-    margin-top 40px
-    font-size:54px;
+    margin-top 20px
+    font-size:26px;
     font-weight:200;
     color:rgba(255,255,255,1);
 }
 .rate-number {
-    font-size:120px;
+    font-size:54px;
     font-weight:300;
     color:rgba(0,255,255,1);
 }

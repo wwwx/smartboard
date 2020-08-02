@@ -33,12 +33,20 @@ export class CityApi {
     return Http.$get(`${BASE}/order/order-day-live`, params);
   }
 
+  static getRealtimeOrder(params = {}) {
+    return Http.$get(`${BASE}/order/realtime-order`, params);
+  }
+
   static getVehicleList(params = {}) {
     return Http.$post(`${BASE}/schedule/vehicle-list`, params);
   }
 
   static getTodayVehicle(params = {}) {
     return Http.$get(`${BASE}/schedule/today-vehicle`, params);
+  }
+
+  static getVehiclePosition(params = {}) {
+    return Http.$get(`${BASE}/schedule/vehicle-location`, params);
   }
 
   static getTodayTripInfos(params = {}) {
@@ -75,6 +83,10 @@ export class CityApi {
 
   static getLineRate(params = {}) {
     return Http.$get(`${BASE}/schedule/line-rate`, params);
+  }
+
+  static getLineList(params = {}) {
+    return Http.$get(`${BASE}/schedule/line-list`, params);
   }
 
 }

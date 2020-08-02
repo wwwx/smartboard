@@ -19,15 +19,14 @@ export default class OrderChart extends Vue {
             credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
                 type: 'bar',
-                height: 700,
-                width: 2000,
-                borderWidth: 0,
+                height: 330,
+                width: 900,
             },
             title: {
                 text: '线路订单量',
                 align: 'left',
                 style: {
-                    fontSize: '44px',
+                    fontSize: '20px',
                     fontWeight: '200',
                     color:'rgba(246,247,247,1)',
                 }
@@ -43,7 +42,7 @@ export default class OrderChart extends Vue {
                 labels: {
                     style: {
                         color: 'rgba(246,247,247,.7)',
-                        fontSize: '36px',
+                        fontSize: '15px',
                         fontWeight: '100',
                     }
                 },
@@ -62,10 +61,24 @@ export default class OrderChart extends Vue {
                 },//去掉刻度数字
             },
             tooltip: {
-                valueSuffix: ' 百万'
+                valueSuffix: '',
+                shared: true,
+                backgroundColor: 'rgba(0,0,0,.7)',
+                borderColor: '#2A3B63',
+                style: {
+                    color: 'white',
+                }
             },
             legend: {
-                enabled: false,
+                itemStyle: {
+                    fontWeight: '200',
+                    fontSize: '14px',
+                    color: 'rgba(255,255,255,.6)'
+                },
+                itemHoverStyle: {
+                    color: 'white'
+                },
+                itemDistance: 20,
             },
             plotOptions: {
                 bar: {
@@ -73,7 +86,7 @@ export default class OrderChart extends Vue {
                         enabled: true,
                         style: {
                             color: 'rgba(246,247,247,1)',
-                            fontSize: '32px',
+                            fontSize: '14px',
                             fontWeight: '100',
                         },
                         allowOverlap: true // 允许数据标签重叠
@@ -93,6 +106,11 @@ export default class OrderChart extends Vue {
                 // data: [107, 31, 635, 203],
             }]
         });
+
+        this.$watch('option', (value: any) => {
+            chart.series[0].update({ data: this.option.data.total } as any)
+            chart.series[1].update({ data: this.option.data.finish } as any)
+        })
         
     }
 }

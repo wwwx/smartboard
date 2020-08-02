@@ -35,8 +35,8 @@ export default class  extends Vue {
             chart: {
                 type: 'column',
                 inverted: true,
-                width: 1070,
-                height: 400,
+                width: 500,
+                height: 200,
             },
             title: {
                 text: '',
@@ -47,7 +47,7 @@ export default class  extends Vue {
                 labels: {
                     style: {
                         color: 'rgba(246,247,247,.7)',
-                        fontSize: '36px',
+                        fontSize: '14px',
                         fontWeight: '100',
                     }
                 },
@@ -106,14 +106,14 @@ export default class  extends Vue {
 
 .numbers {
     position: absolute;
-    right: 30px;
-    bottom: 198px;
+    right: 10px;
+    bottom: 80px;
     flex-direction column
     span {
-        font-size:32px;
+        font-size:14px;
         font-weight:200;
         color:rgba(247,248,248,1);
-        margin-top: 94px;
+        margin-top: 45px;
         text-align: left;
     }
 }

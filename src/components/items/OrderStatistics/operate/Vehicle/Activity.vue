@@ -66,14 +66,14 @@ export default class extends Vue {
 		credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
 		chart: {
             type: 'solidgauge',
-            marginLeft: 200,
-            width: 640,
-            height: 540,
+            marginLeft: 100,
+            width: 300,
+            height: 250,
         },
         title: {
             text: '',
             style: {
-                fontSize: '24px'
+                fontSize: '12px'
             }
         },
         tooltip: {
@@ -81,7 +81,7 @@ export default class extends Vue {
             backgroundColor: 'none',
             shadow: false,
             style: {
-                fontSize: '24px',
+                fontSize: '12px',
             },
             pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
             positioner: function (labelWidth: number) {
@@ -118,7 +118,7 @@ export default class extends Vue {
         },
         plotOptions: {
             solidgauge: {
-                borderWidth: 24,
+                borderWidth: 12,
                 dataLabels: {
                     enabled: false
                 },
@@ -152,22 +152,22 @@ export default class extends Vue {
 
 <style lang="stylus" scoped>
 .legend {
-    font-size:32px;
+    font-size:14px;
     font-weight:200;
     color:rgba(247,248,248,1);
-    margin-left: 60px;
+    margin-left: 40px;
 
     .title {
-        margin-bottom: 32px;
+        margin-bottom: 14px;
         position relative
 
         &:before {
             content: "";
             position: absolute;
             top: 0;
-            left: -45px;
-            width: 32px;
-            height: 32px;
+            left: -21px;
+            width: 14px;
+            height: 14px;
             border-radius 50%
         }
     }

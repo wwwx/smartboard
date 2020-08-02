@@ -54,7 +54,7 @@ export default class Board extends Vue {
         }
     }
     mounted() {
-        this.onTabsClick(1)
+        this.onTabsClick(0)
     }
 }
 </script>
@@ -81,7 +81,7 @@ export default class Board extends Vue {
         }
 
         span {
-            font-size:83px;
+            font-size:38px;
             font-weight:500;
             color:rgba(246,247,247,.5);
         }
@@ -89,13 +89,13 @@ export default class Board extends Vue {
         .bottom-line {
             position absolute
             left 50%
-            margin-left -71px
-            bottom -36px
-            width:142px;
-            height:9px;
+            margin-left -35px
+            bottom -18px
+            width:70px;
+            height:4px;
             visibility hidden
             background-color: rgba(246,247,247,1);
-            border-radius 5px
+            border-radius 2px
         }
 
         &.active {

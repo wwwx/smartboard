@@ -2,7 +2,7 @@
     <div class="vehicle-analysis">
 
 
-        <smart-item :width="2110" :height="418" style="margin-left: -26px;">
+        <smart-item :width="1006" :height="200" style="margin-left: -13px;">
             <LoadRate />
         </smart-item>
 
@@ -20,7 +20,7 @@
             </div>
             <div class="bar pr">
                 <div class="block-title" >在线车辆数据统计</div>
-                <BarChart id="vehicle_bar_chart" style="margin-top: 100px;" v-if="vehicleOption" :option="vehicleOption" />
+                <BarChart id="vehicle_bar_chart" style="margin-top: 50px;" v-if="vehicleOption" :option="vehicleOption" />
             </div>
         </div>
 
@@ -126,16 +126,16 @@ export default class VehicleAnalysis extends Vue {
 
 <style lang="stylus" scoped>
 .block-title {
-    font-size:50px;
+    font-size:24px;
     font-weight:200;
     color:rgba(246,247,247,1);
-    margin-top: 140px;
+    margin-top: 60px;
 }
 .daypeak {
     justify-content space-between
-    margin-top 100px
+    margin-top 40px
     div.bar {
-        flex 0 0 1150px
+        flex 0 0 520px
     }
 }
 </style>

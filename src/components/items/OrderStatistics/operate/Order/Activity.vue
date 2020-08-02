@@ -18,7 +18,8 @@ export default class OrderChart extends Vue {
     @Prop() option!: any;
     @Prop() colors!: Array<string>;
     mounted() {
-        this.drawChart()
+		this.drawChart();
+		
     }
 
     drawChart() {
@@ -44,24 +45,30 @@ export default class OrderChart extends Vue {
 		this.activityOption.series[0].borderColor = this.colors[0]
 		this.activityOption.series[0].data[0].y = this.option.data.series[0]
 
-		Highcharts.chart(this.id, this.activityOption, function(c) {
+		const chart = Highcharts.chart(this.id, this.activityOption);
+
+
+		this.$watch('option', (value: any) => {
+			// console.log(value.data.series[0])
+			// TODO 图表数据无法更新
 			
-		});
+        })
+
     }
 
     activityOption: any = {
 		credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
 		chart: {
 			type: 'solidgauge',
-			marginTop: 50,
-			height: 400,
-			width: 400,
+			marginTop: 25,
+			height: 200,
+			width: 200,
 		},
 		title: {
 			text: '',
 			y: 400,
 			style: {
-				fontSize: '44px'
+				fontSize: '20px'
 			}
 		},
 		tooltip: {
@@ -86,17 +93,17 @@ export default class OrderChart extends Vue {
 		},
 		plotOptions: {
 			solidgauge: {
-				borderWidth: 24,
+				borderWidth: 12,
 				dataLabels: {
 					enabled: true,
 					borderWidth: 0,
 					verticleAlign: 'bottom',
 					useHTML: true,
-					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -52px;">'+ 
-						(100 * this.option.data.series[0] / this.option.data.max).toFixed(0) +'% <br>' + ' <span style="font-size: 40px; font-weight: 100; opacity: .7;">'+ this.option.data.series[0] +'</span><div>', // 数据的百分比 + 数据实际值
+					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -25px;">'+ 
+						(100 * this.option.data.series[0] / this.option.data.max).toFixed(0) +'% <br>' + ' <span style="font-size: 16px; font-weight: 100; opacity: .7;">'+ this.option.data.series[0] +'</span><div>', // 数据的百分比 + 数据实际值
 					style: {
 							color: '#F6F7F7',
-							fontSize: '56px',
+							fontSize: '24px',
 							fontWeight: '200',
 					}
 				},
@@ -131,24 +138,24 @@ export default class OrderChart extends Vue {
 .chart-legend {
     position absolute
     // left 0
-    bottom -70px
+    bottom -32px
 
     .item {
-        margin-right 54px
+        margin-right 25px
     }
 
     .item-icon {
         display inline-block
-        width 28px
-        height 28px
+        width 14px
+        height 14px
         
     }
     .item-title {
-        font-size 40px
+        font-size 20px
         font-weight 400
         position relative
-        top -4px
-        left 20px
+        top -2px
+        left 10px
     }
 }
 </style>

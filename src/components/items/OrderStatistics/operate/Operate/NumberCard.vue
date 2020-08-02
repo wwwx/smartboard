@@ -29,15 +29,15 @@ export default class NumberCard extends Vue {
 <style lang="stylus" scoped>
 .number-card {
     > * {
-        margin-right 15px
+        margin-right 7px
     }
     .delimiter {
         display table-cell
         vertical-align bottom
-        font-size 80px
-        height 80px
+        font-size 40px
+        height 40px
         position relative
-        bottom -50px
+        bottom -24px
     }
 }
 </style>

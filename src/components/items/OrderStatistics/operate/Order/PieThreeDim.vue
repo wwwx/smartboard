@@ -15,13 +15,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import Highcharts from 'highcharts'
 @Component
 export default class OrderChart extends Vue {
     @Prop() id!: string;
     @Prop() option!: any;
     @Prop() colors!: Array<string>;
+
     mounted() {
         this.drawChart()
     }
@@ -33,7 +34,11 @@ export default class OrderChart extends Vue {
         this.pieOption.title.text = this.option.title
         this.pieOption.series[0].data = this.option.series_data
 
-        Highcharts.chart(this.id, this.pieOption);
+        const chart = Highcharts.chart(this.id, this.pieOption);
+        this.$watch('option', (value: any) => {
+            // console.log(value)
+            chart.series[0].update({ data: value.series_data } as any)
+        })
     }
 
     pieOption: any = {
@@ -45,44 +50,50 @@ export default class OrderChart extends Vue {
                             alpha: 54,
                             beta: 0,
                     },
-                    height: 540,
-                    width: 1000,
+                    height: 230,
+                    width: 500,
                 
             },
             title: {
                     text: '',
                     style: {
                         color: 'rgba(246,247,247,1)',
-                        fontSize: '40px',
+                        fontSize: '20px',
                         fontWeight: '100',
                     }
             },
             tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+                    shared: true,
+                    backgroundColor: 'rgba(0,0,0,.7)',
+                    borderColor: '#2A3B63',
+                    style: {
+                        color: 'white',
+                    }
             },
             legend: {
                 itemStyle: {
-                        color: 'rgba(0,202,222,1)',
-                        fontSize: '36px',
-                        fontWeight: '300',
-                    }
+                    color: 'rgba(0,202,222,1)',
+                    fontSize: '15px',
+                    fontWeight: '300',
+                }
             },
             plotOptions: {
                     pie: {
                             allowPointSelect: true,
                             cursor: 'pointer',
-                            depth: 75,
+                            depth: 32,
                             dataLabels: {
                                 enabled: true,
                                 format: '{point.name}',
                                 style: {
 
                                         color: '#F6F7F7',
-                                        fontSize: '36px',
+                                        fontSize: '18px',
                                         fontWeight: '100',
                                 }
                             },
-                            size: 520, // 设置饼图尺寸大小
+                            size: 250, // 设置饼图尺寸大小
                             // showInLegend: true,
                     }
             },
@@ -100,24 +111,24 @@ export default class OrderChart extends Vue {
 .chart-legend {
     position absolute
     // left 0
-    bottom -80px
+    bottom -84px
 
     .item {
-        margin-right 54px
+        margin-right 25px
     }
 
     .item-icon {
         display inline-block
-        width 28px
-        height 28px
+        width 14px
+        height 14px
         
     }
     .item-title {
-        font-size 28px
+        font-size 14px
         font-weight 300
         position relative
-        top -4px
-        left 20px
+        top -2px
+        left 10px
     }
 }
 </style>

@@ -32,34 +32,39 @@ export default class OrderChart extends Vue {
 
             credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
-                width: 1000,
-                height: 600,
-
+                width: 450,
+                height: 320,
             },
             title: {
                 text: this.option.title,
                 align: 'left',
                 style: {
                     color: 'rgba(246,247,247,1)',
-                    fontSize: '50px',
+                    fontSize: '24px',
                     fontWeight: '100',
                 }
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                pointFormat: '{series.name} <b>{point.percentage:.1f}%</b>',
+                shared: true,
+                backgroundColor: 'rgba(0,0,0,.7)',
+                borderColor: '#2A3B63',
+                style: {
+                    color: 'white',
+                }
             },
             plotOptions: {
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    size: 360,
+                    size: 180,
                     dataLabels: {
                         enabled: true,
                         // format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                         format: '{y}',
                         style: {
                             color: 'rgba(246,247,247,.7)',
-                            fontSize: '32px',
+                            fontSize: '14px',
                             fontWeight: '200',
                         },
                         connectorColor: 'silver',
@@ -67,13 +72,16 @@ export default class OrderChart extends Vue {
                 }
             },
             legend: {
-                itemStyle: {
-                    fontWeight: '100',
-                    fontSize: '32px',
-                    color: 'rgba(255,255,255,.6)',
-                },
+                floating: true,
+                backgroundColor: 'rgba(0,0,0,.2)',
+                borderColor: '#2A3B63',
                 itemHoverStyle: {
-                    color: 'white'
+                    color: 'white',
+                },
+                itemStyle: {
+                    color: 'rgba(246,247,247,1)',
+                    fontWeight: '300',
+                    fontSize: '14px',
                 },
                 itemDistance: 20,
                 squareSymbol: true,
@@ -83,6 +91,7 @@ export default class OrderChart extends Vue {
                 name: '',
                 startAngle: 270, // 起始角度
                 showInLegend: true,
+                borderWidth: 0,
                 data: [ ...this.option.data ]
             }]
         });
