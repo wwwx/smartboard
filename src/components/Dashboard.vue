@@ -2,7 +2,7 @@
     <div class="main">
 
             <!-- header start -->
-            <smart-item :width="7155" :height="240">
+            <smart-item :width="3432" :height="114">
                 <div class="subtitle">
                     <!-- <span>智慧班车 / </span> -->
                     <span class="active">智慧公交</span>
@@ -12,31 +12,36 @@
             </smart-item>
             <!-- header end -->
 
-
         <div class="content">
             
             <!-- left board start -->
             <div class="wrap-item" style="top:0; left: 0;">
-                <smart-item :width="842" :height="2464">
+                <smart-item :width="415" :height="270">
+                    <ReservationOrder />
+                </smart-item>
+            </div>
+
+            <div class="wrap-item" style="top:282px; left: 0;">
+                <smart-item :width="415" :height="912">
                     <MonitorList />
                 </smart-item>
             </div>
             
             
-            <div class="wrap-item" style="top:0; left: 866px;">
-                <smart-item :width="1522" :height="766">
+            <div class="wrap-item" style="top:0; left: 428px;">
+                <smart-item :width="750" :height="555">
                     <MonitorViews />
                 </smart-item>
             </div>
             
-            <div class="wrap-item" style="top:790px; left: 866px;">
-                <smart-item :width="1522" :height="766">
+            <!-- <div class="wrap-item" style="top:388px; left: 428px;">
+                <smart-item :width="750" :height="375">
                     <MonitorViews />
                 </smart-item>
-            </div>
+            </div> -->
 
-            <div class="wrap-item" style="top:1580px; left: 866px;">
-                <smart-item :width="1522" :height="884">
+            <div class="wrap-item" style="top:565px; left: 428px;">
+                <smart-item :width="750" :height="628">
                     <PositionMap />
                 </smart-item>
             </div>
@@ -47,8 +52,8 @@
 
 
             <!-- center board start -->
-            <div class="wrap-item" style="top:0; left: 2414px;">
-                <smart-item :width="2160" :height="2464">
+            <div class="wrap-item" style="top:0; left: 1190px;">
+                <smart-item :width="1030" :height="1194">
                     <OrderStatistics />
                 </smart-item>
             </div>
@@ -58,8 +63,8 @@
 
 
             <!-- right board start -->
-            <div class="wrap-item" style="top:0; left: 4598px;">
-                <smart-item :width="2556" :height="2464">
+            <div class="wrap-item" style="top:0; left: 2232px;">
+                <smart-item :width="1200" :height="1194">
                     <RouteStatistics />
                 </smart-item>
             </div>
@@ -74,7 +79,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import SmartItem from "./SmartItem.vue";
+import { EventBus } from '../eventBus'
 import {
+    ReservationOrder,
     MonitorList,
     MonitorViews,
     PositionMap,
@@ -88,6 +95,7 @@ import moment from "moment";
 @Component({
     components: {
         SmartItem,
+        ReservationOrder,
         MonitorList,
         MonitorViews,
         PositionMap,
@@ -102,6 +110,28 @@ export default class Dashboard extends Vue {
     mounted() {
         this.formatTime();
         this.getUsers();
+
+        this.initRealtime()
+    }
+
+    initRealtime() {
+
+        // 5s
+        const timer_5s = setInterval(() => {
+            EventBus.$emit('refresh_5s')
+        }, 5*1000);
+
+        // 2h
+        const timer_2h = setInterval(() => {
+            EventBus.$emit('refresh_2h')
+        }, 2*60*60*1000);
+
+
+
+
+
+
+
     }
 
     formatTime() {
@@ -132,9 +162,11 @@ export default class Dashboard extends Vue {
 }
 .main {
     box-sizing: border-box;
-    width: 7200px;
-    height: 2772px;
-    padding: 24px;
+    // width: 7200px;
+    // height: 2772px;
+    width: 3456px;
+    height: 1344px;
+    padding: 12px;
     box-shadow: 0 2px 3px rgba(26, 26, 26, 0.1);
     transition: all 500ms ease-in-out;
     -webkit-transition: all 500ms ease-in-out;
@@ -152,10 +184,10 @@ h1.header-title {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 35px;
-    width:1625px;
-    height:110px;
-    font-size:116px;
+    margin-top: 15px;
+    width:800px;
+    height:50px;
+    font-size:54px;
     font-weight:400;
     color:rgba(246,247,247,1);
     text-align: center;
@@ -164,10 +196,10 @@ h1.header-title {
 
 .subtitle {
     position: absolute;
-    left: 82px;
-    bottom: 32px;
+    left: 40px;
+    bottom: 16px;
     span {
-        font-size:83px;
+        font-size:36px;
         font-weight:400;
         color:rgba(246,247,247,.5);
 
@@ -180,10 +212,10 @@ h1.header-title {
 .header-time {
     margin: 0;
     position: absolute;
-    bottom: 32px;
-    right: 82px;
-    font-size:63px;
-    font-weight:400;
+    bottom: 16px;
+    right: 40px;
+    font-size:36px;
+    font-weight:300;
     color:rgba(246,247,247,1);  
 }
 
@@ -191,7 +223,7 @@ h1.header-title {
     position: relative;
     width: 100%;
     height: calc(100% - 264px);
-    margin-top: 24px;
+    margin-top: 12px;
 }
 
 </style>

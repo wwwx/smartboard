@@ -2,7 +2,7 @@
     <div class="operate-analysis">
 
 
-         <smart-item :width="2110" :height="418" style="margin-left: -26px;">
+         <smart-item :width="1000" :height="200" style="margin-left: -12px;">
              <Revenue />
          </smart-item>
 
@@ -75,7 +75,7 @@ export default class OperateAnalysis extends Vue {
     }
 
     async getSeat() {
-        // const { data: { soldSeatNum, restSeatNum } } = await CityApi.getSeatNum({ tripType: 3 }); // TODO 服务端 500
+        const { data: { soldSeatNum, restSeatNum } } = await CityApi.getSeatNum({ tripType: 3 });
         // console.log(soldSeatNum, restSeatNum)
 
         
@@ -84,11 +84,11 @@ export default class OperateAnalysis extends Vue {
                 data: [
                     {
                         name: '售出座位',
-                        y: 288,
+                        y: soldSeatNum,
                         sliced: true,
                         selected: true
                     },
-                    ['剩余座位',   34]
+                    ['剩余座位',   restSeatNum]
                 ]
             }
     }
@@ -100,6 +100,6 @@ export default class OperateAnalysis extends Vue {
 
 <style lang="stylus" scoped>
 .platform, .customer {
-    margin-top: 100px;
+    margin-top: 30px;
 }
 </style>

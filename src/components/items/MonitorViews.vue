@@ -1,49 +1,18 @@
 <template>
     <div class="monitor-views">
-        <div class="video-item">
+        <div
+            class="video-item"
+            v-for="i in [1,5,3,4,2,6]"
+            :key="i"
+        >
             <video
-                style="width:730px; height: 348px;"
+                style="object-fit: cover;width:360px; height: 170px;"
                 autoplay
                 loop
+                muted
             >
                 <source
-                    src="https://dwgk-hlzf.oss-cn-hangzhou.aliyuncs.com/zhcx/1.mp4"
-                    type="video/mp4"
-                >
-            </video>
-        </div>
-        <div class="video-item">
-            <video
-                style="width:730px; height: 348px;"
-                autoplay
-                loop
-            >
-                <source
-                    src="https://dwgk-hlzf.oss-cn-hangzhou.aliyuncs.com/zhcx/1.mp4"
-                    type="video/mp4"
-                >
-            </video>
-        </div>
-        <div class="video-item">
-            <video
-                style="width:730px; height: 348px;"
-                autoplay
-                loop
-            >
-                <source
-                    src="https://dwgk-hlzf.oss-cn-hangzhou.aliyuncs.com/zhcx/1.mp4"
-                    type="video/mp4"
-                >
-            </video>
-        </div>
-        <div class="video-item">
-            <video
-                style="width:730px; height: 348px;"
-                autoplay
-                loop
-            >
-                <source
-                    src="https://dwgk-hlzf.oss-cn-hangzhou.aliyuncs.com/zhcx/1.mp4"
+                    :src="'https://zhcxtest.oss-cn-shanghai.aliyuncs.com/zhanshi/' + i +'.mp4'"
                     type="video/mp4"
                 >
             </video>
@@ -55,23 +24,20 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class MonitorViews extends Vue {
-    
-}
+export default class MonitorViews extends Vue {}
 </script>
 
 <style lang="stylus" scoped>
 .monitor-views {
     position: absolute;
-    top: 24px;
-    left: 24px;
+    top: 12px;
+    left: 12px;
 }
 
 .video-item {
     float: left;
-    margin-bottom: 18px;
+    margin-bottom: 5px;
     // margin-left: 24px;
     background-color: black;
 }
-
 </style>

@@ -14,7 +14,7 @@ class Http {
         })  
             .then((response) => response.json())
             .catch((error) => {  
-                alert(error)  
+                console.error(error)  
             })  
     } 
 
@@ -28,7 +28,7 @@ class Http {
         })  
             .then((response) => response.json())
             .catch((error) => {  
-                alert(error)  
+                console.error(error)  
             });
     }
 }

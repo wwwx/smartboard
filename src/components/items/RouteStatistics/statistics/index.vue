@@ -20,6 +20,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import Activity from './Activity.vue'
 import Bubble from './Bubble.vue'
 import { CityApi } from '../../../../api/city-api';
+import { EventBus } from '../../../../eventBus';
 
 @Component({
     components: {
@@ -30,36 +31,43 @@ import { CityApi } from '../../../../api/city-api';
 export default class  extends Vue {
 
     lineOption: any = null
+    count = 1
 
-    created() {
+    mounted() {
         this.getCollect()
-        this.getRate()
+        this.getRate();
+
+        EventBus.$on('refresh_2h', () => {
+            this.getCollect()
+            this.getRate();
+        })
+
     }
 
     async getCollect() {
-        const { data: { avgSpeed, avgStopLength, lineTotalLength, lineTotalNum } } = await CityApi.getLineCollect({ lineType: 3 });
-        // console.log(data)
-        // this.lineOption = { avgSpeed, avgStopLength, lineTotalLength, lineTotalNum } // TODO 数据不完整
-        this.lineOption = { avgSpeed: 410, avgStopLength: 123, lineTotalLength: 1766.1, lineTotalNum: 345 }
+        const { data: { avgSpeed, avgStopLength, lineTotalLength, lineTotalNum } } = await CityApi.getLineCollect({ lineType: 2 }); // TODO type 2
+        // console.log({ avgSpeed, avgStopLength, lineTotalLength, lineTotalNum })
+        this.lineOption = { avgSpeed, avgStopLength, lineTotalLength, lineTotalNum };
+        
+        // this.lineOption = { avgSpeed: 410, avgStopLength: 123, lineTotalLength: 1766.1, lineTotalNum: 345 }
 
     }
 
     async getRate() {
-        const { data } = await CityApi.getLineRate({ lineType: 3 }) // TODO 没有数据
-        // console.log(data)
+        const { data } = await CityApi.getLineRate({ lineType: 2 })
         this.activityOption1 = {
-            title: '庄子—百果园森林公园',
+            title: data[0].lineName,
             data: {
                 max: 100,
-                series: [33]
+                series: [+data[0].uerRate.replace('%','')]
             },
         }
 
         this.activityOption2 = {
-            title: '605路',
+            title: data[1].lineName,
             data: {
                 max: 100,
-                series: [53]
+                series: [+data[1].uerRate.replace('%','')]
             },
         }
     }
@@ -73,9 +81,9 @@ export default class  extends Vue {
 
 <style lang="stylus" scoped>
 .block-title {
-    font-size:50px;
+    font-size:24px;
     font-weight:200;
     color:rgba(246,247,247,1);
-    margin-top: 140px;
+    margin-top: 56px;
 }
 </style>

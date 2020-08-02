@@ -28,16 +28,16 @@ export default class BarChart extends Vue {
             credits: { enabled: false}, // 去掉右下角链接  Hightchart.com
             chart: {
                 zoomType: 'xy',
-                width: 1900,
-                height: 760,
-                marginLeft: 150,
+                width: 960,
+                height: 420,
+                marginLeft: 70,
             },
             title: {
                 text: '获客量/日活率',
                 align: 'left',
                 style: {
                     color: 'rgba(246,247,247,1)',
-                    fontSize: '50px',
+                    fontSize: '24px',
                     fontWeight: '100',
                 }
             },
@@ -54,25 +54,25 @@ export default class BarChart extends Vue {
                     rotation: -45,
                     style: {
                         color: 'rgba(246,247,247,.7)',
-                        fontSize: '32px',
+                        fontSize: '14px',
                         fontWeight: '100',
                     }
                 },
             }],
             yAxis: [{ // Primary yAxis
-
+                gridLineDashStyle: 'dot',
                 title: {
                     text: '获客量',
                     style: {
                         color: 'rgba(246,247,247,.7)',
-                        fontSize: '32px',
+                        fontSize: '14px',
                         fontWeight: '100',
                     }
                 },
                 labels: {
                     style: {
                         color: 'rgba(246,247,247,1)',
-                        fontSize: '32px',
+                        fontSize: '14px',
                         fontWeight: '100',
                     }
                 },
@@ -82,10 +82,12 @@ export default class BarChart extends Vue {
                     text: '日活率',
                     style: {
                         color: 'rgba(246,247,247,.7)',
-                        fontSize: '32px',
+                        fontSize: '14px',
                         fontWeight: '100',
                     }
                 },
+                gridLineWidth: 0,
+                minorGridLineWidth: 0,
                 labels: {
                     format: '{value} %',
                     style: {
@@ -98,19 +100,32 @@ export default class BarChart extends Vue {
                 opposite: true
             }],
             tooltip: {
-                shared: true
+                shared: true,
+                backgroundColor: 'rgba(0,0,0,.7)',
+                borderColor: '#2A3B63',
+                style: {
+                    color: 'white',
+                }
             },
             legend: {
                 enabled: true,
                 layout: 'vertical',
-                align: 'left',
-                x: 120,
+                align: 'right',
+                // x: 120,
                 verticalAlign: 'top',
-                y: 100,
+                // y: 100,
                 floating: true,
-                backgroundColor:  '#FFFFFF'
+                backgroundColor: 'rgba(0,0,0,.2)',
+                borderColor: '#2A3B63',
+                itemHoverStyle: {
+                    color: 'white',
+                    // opacity: '.7',
+                },
+                itemStyle: {
+                    color: 'rgba(246,247,247,1)',
+                    fontWeight: '300',
+                }
             },
-            
             series: [{
                 name: '获客量',
                 type: 'column',

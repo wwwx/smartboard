@@ -15,12 +15,12 @@ export default class NumberCell extends Vue {
 
 <style lang="stylus" scoped>
 .number-cell {
-    width: 94px;
-    height: 136px;
+    width: 45px;
+    height: 64px;
     border-radius: 4px;
     background-color: #006BFF;
     color: #FFF;
-    font-size 120px
+    font-size 60px
     font-weight 200
     text-align center
     vertical-align middle
@@ -29,9 +29,9 @@ export default class NumberCell extends Vue {
 
     .divider {
         position absolute
-        top: 68px
+        top: 32px
         width: 100%;
-        height: 6px;
+        height: 3px;
         background-color: #001140;
         z-index 0
     }
@@ -46,18 +46,18 @@ export default class NumberCell extends Vue {
     &:after {
         position: absolute;
         content: ""
-        top: 58px;
-        width: 24px;
-        height: 24px;
+        top: 28px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         background-color: #001140;
     }
     &:before {
-        left: -14px;
+        left: -7px;
     }
 
     &:after {
-        right: -14px;
+        right: -7px;
     }
 }
 </style>

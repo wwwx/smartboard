@@ -18,7 +18,7 @@ export default class OrderChart extends Vue {
     @Prop() option!: any;
     @Prop() colors!: Array<string>;
     mounted() {
-        this.drawChart()
+		this.drawChart()
     }
 
     drawChart() {
@@ -45,9 +45,9 @@ export default class OrderChart extends Vue {
 		this.activityOption.series[0].data[0].y = this.option.data.series[0]
 		// this.activityOption.yAxis.max = this.option.data.max
 
-		Highcharts.chart(this.id, this.activityOption, function(c) {
-			
-		});
+		const chart = Highcharts.chart(this.id, this.activityOption);
+
+
     }
 
     activityOption: any = {
@@ -55,14 +55,14 @@ export default class OrderChart extends Vue {
 		chart: {
 			type: 'solidgauge',
 			marginTop: 50,
-			height: 400,
-			width: 400,
+			height: 240,
+			width: 240,
 		},
 		title: {
 			text: '',
 			y: 400,
 			style: {
-				fontSize: '44px'
+				fontSize: '20px'
 			}
 		},
 		tooltip: {
@@ -87,17 +87,17 @@ export default class OrderChart extends Vue {
 		},
 		plotOptions: {
 			solidgauge: {
-				borderWidth: 24,
+				borderWidth: 12,
 				dataLabels: {
 					enabled: true,
 					borderWidth: 0,
 					verticleAlign: 'bottom',
 					useHTML: true,
-					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -20px;">'+ 
+					format:  '<div style="text-align: center; line-height: .88; position: relative; top: -10px;">'+ 
 						(100 * this.option.data.series[0] / this.option.data.max).toFixed(0) +'% <div>', // 数据的百分比 + 数据实际值
 					style: {
 							color: '#F6F7F7',
-							fontSize: '56px',
+							fontSize: '24px',
 							fontWeight: '200',
 					}
 				},
@@ -132,20 +132,20 @@ export default class OrderChart extends Vue {
 .chart-legend {
     position absolute
     // left 0
-    bottom -70px
+    bottom -40px
 
     .item {
-        margin-right 54px
+        margin-right 26px
     }
 
     .item-icon {
         display inline-block
-        width 28px
-        height 28px
+        width 14px
+        height 14px
         
     }
     .item-title {
-        font-size 40px
+        font-size 20px
         font-weight 400
         position relative
         top -4px

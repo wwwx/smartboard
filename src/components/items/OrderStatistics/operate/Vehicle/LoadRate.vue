@@ -2,7 +2,7 @@
     <div class="load d-flex justify-content-around">
         <div class="load-rate d-flex justify-content-center">
             <div>
-                <div class="rate-number">{{ loadRate }}%</div>
+                <div class="rate-number">{{ loadRate }}</div>
                 <div class="rate-title">平均满载率</div>
             </div>
         </div>
@@ -29,9 +29,8 @@ export default class  extends Vue {
             const { data: { avgVehicleNum } } = await CityApi.getAvgVehicleNum({ tripType: 3 });
             this.avgVehicleNum = avgVehicleNum
             
-            // const { data: { loadRate } } = await CityApi.getLoadRate({ tripType: 1 }); // TODO 服务端 500
-            // console.log(loadRate)
-            this.loadRate = 67.1
+            const { data: { loadRate } } = await CityApi.getLoadRate({ tripType: 3 });
+            this.loadRate = loadRate
 
         } catch (error) {
             
@@ -43,21 +42,21 @@ export default class  extends Vue {
 
 <style lang="stylus" scoped>
 .load {
-    padding: 0 150px
+    padding: 0 60px
 }
 .load-rate {
-    min-width: 400px;
-    margin-top 40px
+    min-width: 200px;
+    margin-top 20px
     text-align center
 }
 .rate-title {
-    margin-top 40px
-    font-size:54px;
+    margin-top 20px
+    font-size:25px;
     font-weight:200;
     color:rgba(255,255,255,1);
 }
 .rate-number {
-    font-size:120px;
+    font-size:54px;
     font-weight:300;
     color:rgba(0,255,255,1);
 }

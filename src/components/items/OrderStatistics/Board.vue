@@ -77,7 +77,7 @@ export default class Board extends Vue {
         }
     }
     mounted() {
-        this.onSubAnaysisTabsClick(1)
+        this.onSubAnaysisTabsClick(0)
     }
 }
 </script>
@@ -88,27 +88,28 @@ export default class Board extends Vue {
 }
 .order-content {
     position relative
-    top 175px
+    top 80px
     width 100%
 }
 .tabs-analysis-subtitle {
     position relative
-    top 100px
+    top 46px
     z-index 2
     display flex
     justify-content center
     align-items center
     .tab-item {
-        width:251px;
-        height:106px;
+        // width:120px;
+        height:48px;
         background-color: rgba(1, 107,255, .2);
         display flex
         justify-content center
         align-items center
-        border-radius 54px
-        margin 0 40px
+        border-radius 24px
+        margin 0 20px
+        padding: 0 32px;
         span {
-            font-size:42px;
+            font-size:20px;
             font-weight:400;
             color:rgba(246,247,247,1);
         }
@@ -118,7 +119,7 @@ export default class Board extends Vue {
         }
 
         &:nth-child(3) {
-            width: 295px !important;
+            // width: 90px !important;
         }
     }
 }
@@ -137,7 +138,7 @@ export default class Board extends Vue {
         }
 
         span {
-            font-size:83px;
+            font-size:38px;
             font-weight:500;
             color:rgba(246,247,247,.5);
         }
@@ -145,13 +146,13 @@ export default class Board extends Vue {
         .bottom-line {
             position absolute
             left 50%
-            margin-left -71px
-            bottom -36px
-            width:142px;
-            height:9px;
+            margin-left -35px
+            bottom -18px
+            width:70px;
+            height:4px;
             visibility hidden
             background-color: rgba(246,247,247,1);
-            border-radius 5px
+            border-radius 2px
         }
 
         &.active {
