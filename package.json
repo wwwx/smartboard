@@ -16,7 +16,7 @@
     "@vue/cli-service": "~4.4.0",
     "bootstrap-4-grid": "^3.4.0",
     "echarts": "^4.8.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.27.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
