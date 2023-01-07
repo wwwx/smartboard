@@ -13,7 +13,7 @@
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-typescript": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
+    "@vue/cli-service": "~5.0.8",
     "bootstrap-4-grid": "^3.4.0",
     "echarts": "^4.8.0",
     "lodash": "^4.17.15",
